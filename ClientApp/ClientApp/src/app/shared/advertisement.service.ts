@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class AdvertisementService {
-  url = 'https://localhost:44378/api';
+  url = 'https://localhost:44352/api';
   constructor(
     private http: HttpClient,
     private userSrvice: UserService,

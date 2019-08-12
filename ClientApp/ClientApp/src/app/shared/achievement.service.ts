@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 @Injectable()
 export class AchievementService {
-   url = 'https://localhost:44378/api/Achievement/';
+   url = 'https://localhost:44352/api/Achievement/';
    constructor(private http: HttpClient, private userService: UserService) {}
   getAllUserAchievement() {
     return this.http.get(this.url + 'GetAllUserAchievement/' + localStorage.getItem('userId'));
