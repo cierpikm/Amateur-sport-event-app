@@ -1,0 +1,92 @@
+<div class="row justify-content-center">
+  <div class="col-sm-12">
+    <!-- Default form register -->
+    <form class="text-center  " #form="ngForm">
+      <p class="h4 mb-4">Rejestracja</p>
+
+      <div class="md-form">
+        <input
+          type="text"
+          id="defaultRegisterFormFirstName"
+          class="form-control"
+          placeholder="Nazwa użytkownika"
+          name="UserName"
+          [(ngModel)]="userAuth.UserName"
+          #username="ngModel"
+          required
+        />
+        <mdb-error
+          *ngIf="username.invalid && (username.dirty || username.touched)"
+          >Login niepoprawny</mdb-error
+        >
+      </div>
+
+      <!-- E-mail -->
+      <div class="md-form">
+        <input
+          mdbInput
+          mdbValidate
+          type="email"
+          id="defaultRegisterFormEmail"
+          class="form-control mb-4"
+          placeholder="E-mail"
+          name="Email"
+          required
+          pattern="[^ @]*@[^ @]*"
+          #mail="ngModel"
+          [(ngModel)]="userAuth.Email"
+        />
+        <mdb-error *ngIf="mail.invalid && (mail.dirty || mail.touched)"
+          >Email niepoprawny</mdb-error
+        >
+      </div>
+      <!-- Password -->
+      <div class="md-form">
+        <input
+          mdbInput
+          mdbValidate
+          type="password"
+          id="defaultRegisterFormPassword"
+          class="form-control"
+          placeholder="Hasło"
+          aria-describedby="defaultRegisterFormPasswordHelpBlock"
+          name="Password"
+          required
+          minlength="6"
+          #nameField="ngModel"
+          [(ngModel)]="userAuth.Password"
+        />
+        <mdb-error
+          *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)"
+          >Hasło musi składać się z 6 znaków.</mdb-error
+        >
+      </div>
+
+      <br />
+      <div [hidden]="!postError" class="alert alert-danger">
+        {{ postErrorMessage }}
+      </div>
+
+      <!-- Sign up button -->
+      <button
+        class="btn btn-info my-4 btn-block"
+        type="submit"
+        (click)="signIn()"
+      >
+        Zarejestruj się
+      </button>
+      <!-- Social register -->
+      <p>zarejestruj się za pomocą:</p>
+
+      <a class="light-blue-text mx-2 fa-lg">
+
+        <i class="fab fa-facebook"></i>
+      </a>
+      <a  class="red-text mx-2 fa-lg">
+        <i class="fab fa-google"></i>
+      </a>
+
+    </form>
+    <!-- Default form register -->
+  </div>
+</div>

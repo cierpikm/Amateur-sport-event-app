@@ -1,0 +1,194 @@
+<link
+  href="http://fonts.googleapis.com/css?family=Allura&subset=latin,latin-ext"
+  rel="stylesheet"
+  type="text/css"
+/>
+<div class="container">
+  <div class="row py-2 justify-content-center" *ngFor="let item of achievements">
+    <div class="col-sm-9 border shadow py-2">
+      <div class="row">
+        <div class="col-sm-7">
+          <h6
+            class="text-center"
+            style="font-family: 'Allura', sans-serif; font-size:40px;"
+          >
+            Osiągnięcie
+          </h6>
+          <p class="text-center">{{ item.title }}</p>
+          <div class="row justify-content-center my-auto mx-auto">
+            <div class="col-sm-6 align-items-end pl-0 mr-0 my-auto">
+              Zdobyte miejsce - {{ item.ranking }}
+            </div>
+            <div class="col-sm pl-0">
+              <i
+                *ngIf="item.ranking === 1"
+                class="fas fa-medal fa-6x amber-text my-3"
+              ></i>
+              <i
+                *ngIf="item.ranking === 2"
+                class="fas fa-medal fa-6x grey-text my-3"
+              ></i>
+              <i
+                *ngIf="item.ranking === 3"
+                class="fas fa-medal fa-6x brown-text my-3"
+              ></i>
+            </div>
+          </div>
+          <div class="text-center">
+            <button class="btn peach-gradient" (click)="basicModal.show()">
+              Więcej
+            </button>
+          </div>
+        </div>
+        <div class="col-sm text-center">
+          <img src="assets/cup_icon.png" class=" img-fluid w-75" />
+        </div>
+      </div>
+      <div class="bottom-right" *ngIf="!onClickViewer">
+        <i class="far fa-edit fa-2x px-1 orange-text clickable"></i>
+        <i
+          (click)="deleteAchievement(item.id)"
+          class="far fa-trash-alt fa-2x px-1 red-text clickable"
+        ></i>
+      </div>
+    </div>
+
+    <div
+      mdbModal
+      #basicModal="mdbModal"
+      class="modal fade"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myBasicModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close pull-right"
+              aria-label="Close"
+              (click)="basicModal.hide()"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title w-100" id="myModalLabel">
+              Dodatkowe informację
+            </h4>
+          </div>
+          <div class="modal-body">
+            {{ item.extraInformation }}
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              mdbBtn
+              color="secondary"
+              class="waves-light"
+              aria-label="Close"
+              (click)="basicModal.hide()"
+              mdbWavesEffect
+            >
+              Zamknij
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <button
+      type="button"
+      *ngIf="!onClickViewer"
+      class="btn yellow-gradient btn-outline-warning ml-auto"
+      (click)="basicModal2.show()"
+    >
+      Dodaj osiągnięcie
+    </button>
+  </div>
+</div>
+
+<div
+  mdbModal
+  #basicModal2="mdbModal"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myBasicModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-bottom-right modal-top" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close pull-right"
+          aria-label="Close"
+          (click)="basicModal.hide()"
+        ></button>
+        <h4 class="modal-title w-100" id="myModalLabel">
+          Dodaj swoje osiągnięcie
+        </h4>
+      </div>
+      <div class="modal-body">
+        <!-- Material input -->
+        <form *ngIf="achievement">
+          <div class="row">
+            <div class="col-10 mx-auto">
+              <input
+                class="form-control my-2"
+                type="text"
+                placeholder="Tytuł Twojego osiągnięcia"
+                name="title"
+                [(ngModel)]="achievement.title"
+              />
+            </div>
+            <div class="col-10 mx-auto">
+              <input
+                class="form-control my-2"
+                type="number"
+                placeholder="Zdobyte miejsce"
+                name="ranking"
+                [(ngModel)]="achievement.ranking"
+              />
+            </div>
+            <div class="col-10 mx-auto">
+              <input
+                class="form-control my-2"
+                type="text"
+                placeholder="Dodatkowe informację"
+                name="extraInformation"
+                [(ngModel)]="achievement.extraInformation"
+              />
+            </div>
+          </div>
+        </form>
+        <div class="modal-footer">
+          <button
+            type="button"
+            mdbBtn
+            color="secondary"
+            class="waves-light"
+            aria-label="Close"
+            (click)="basicModal2.hide()"
+            mdbWavesEffect
+          >
+            Zamknij
+          </button>
+          <button
+            type="button"
+            mdbBtn
+            color="primary"
+            class="relative waves-light"
+            mdbWavesEffect
+            (click)="addAchievement()"
+          >
+            Zapisz
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

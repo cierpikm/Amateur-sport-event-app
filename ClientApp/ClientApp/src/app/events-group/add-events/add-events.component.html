@@ -1,0 +1,279 @@
+<div class="container py-4 ">
+  <div class="row justify-content-center">
+    <div class="col-sm-12 border shadow">
+      <form #evnt="ngForm">
+        <div class="row">
+          <div class="col">
+            <div class="md-form">
+              <mdb-icon fab icon="accusoft" class="prefix"></mdb-icon>
+              <input
+                mdbInput
+                type="text"
+                id="title"
+                class="form-control"
+                name="Title"
+                [(ngModel)]="event.Title"
+              />
+              <label for="title">Tytuł</label>
+            </div>
+          </div>
+          <div class="col pt-4">
+            <select
+              name="SportType"
+              class="browser-default custom-select"
+              [(ngModel)]="event.SportType"
+            >
+              <option selected>Wybierz rodzaj sportu</option>
+              <option value="0">Piłka ręczna</option>
+              <option value="1">Tenis stołowy</option>
+              <option value="2">Bilard</option>
+              <option value="3">Pływanie</option>
+              <option value="4">Rower</option>
+              <option value="5">Badminton</option>
+              <option value="6">Baseball</option>
+              <option value="7">Piłka nożna</option>
+              <option value="8">Siatkówka</option>
+              <option value="9">Hokej</option>
+              <option value="10">Tenis ziemny</option>
+              <option value="11">Koszykówka</option>
+            </select>
+          </div>
+          <div class="col">
+            <div class="md-form">
+              <label>
+                Data wydarzenia:
+                <input
+                  id="Date"
+                  [min]="min"
+                  [owlDateTimeTrigger]="dt7"
+                  [owlDateTime]="dt7"
+                  name="Date"
+                  [(ngModel)]="event.Date"
+                  required
+                />
+                <owl-date-time [startAt]="min" #dt7></owl-date-time>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-7">
+            <div class="md-form">
+              <mdb-icon fas icon="city" class="prefix"></mdb-icon>
+              <input
+                mdbInput
+                type="text"
+                id="city"
+                class="form-control"
+                name="City"
+                [(ngModel)]="event.Localization.City"
+              />
+              <label for="city">Miasto</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="md-form">
+              <mdb-icon fas icon="road" class="prefix"></mdb-icon>
+              <input
+                mdbInput
+                type="text"
+                id="street"
+                class="form-control"
+                name="Street"
+                [(ngModel)]="event.Localization.Street"
+              />
+              <label for="street">Ulica</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="md-form">
+              <mdb-icon fas icon="list-ol" class="prefix"></mdb-icon>
+              <input
+                mdbInput
+                type="number"
+                id="number"
+                class="form-control"
+                name="StreetNumber"
+                [(ngModel)]="event.Localization.StreetNumber"
+              />
+              <label for="numbr">Numer</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col">
+            <div class="md-form">
+              <mdb-icon fas icon="hand-holding-usd" class="prefix"></mdb-icon>
+              <input
+                mdbInput
+                type="text"
+                id="name"
+                class="form-control"
+                name="name"
+                [(ngModel)]="event.sponsors.toLocaleString"
+              />
+              <label for="name">Nazwa sponsora</label>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="md-form">
+              <mdb-icon fas icon="hand-holding-usd" class="prefix"></mdb-icon>
+              <input
+                mdbInput
+                type="text"
+                id="type"
+                class="form-control"
+                name="type"
+                [(ngModel)]="event.sponsors"
+              />
+              <label for="type">Typ sponsorowania</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col">
+            <div class="md-form">
+              <mdb-icon fab icon="facebook-square" class="prefix"></mdb-icon>
+              <input
+                mdbInput
+                type="text"
+                id="facebook"
+                class="form-control"
+                name="facebook"
+                [(ngModel)]="event.facebookURL"
+              />
+              <label for="facebook">Link do facebooka</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="md-form">
+              <mdb-icon fab icon="twitter-square" class="prefix"></mdb-icon>
+              <input
+                mdbInput
+                type="text"
+                id="twitter"
+                class="form-control"
+                name="twitter"
+                [(ngModel)]="event.twitterURL"
+              />
+              <label for="twitter">Link do twittera</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="md-form">
+              <mdb-icon fab icon="instagram" class="prefix"></mdb-icon>
+              <input
+                mdbInput
+                type="text"
+                id="instagram"
+                class="form-control"
+                name="instagram"
+                [(ngModel)]="event.instagramURL"
+              />
+              <label for="instagram">Link do instagrama</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-sm-4">
+            <div class="md-form">
+              <mdb-icon fas icon="pen-nib" class="prefix"></mdb-icon>
+              <input
+                mdbInput
+                type="text"
+                id="shortDescription"
+                class="form-control"
+                name="shortDescription"
+                [(ngModel)]="event.shortDescription"
+              />
+              <label for="shortDescription">Krótki opis</label>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="md-form">
+              <mdb-icon fas icon="pen-nib" class="prefix"></mdb-icon>
+              <input
+                mdbInput
+                type="text"
+                id="description"
+                class="form-control"
+                name="description"
+                [(ngModel)]="event.description"
+              />
+              <label for="description">Opis szczegółowy</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col">
+            <div class="md-form">
+              <mdb-icon fas icon="university" class="prefix"></mdb-icon>
+              <input
+                mdbInput
+                type="text"
+                id="organizer"
+                class="form-control"
+                name="organizer"
+                [(ngModel)]="event.organizer"
+              />
+              <label for="organizer">Organizator</label>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="md-form">
+              <mdb-icon fas icon="globe" class="prefix"></mdb-icon>
+              <input
+                mdbInput
+                type="text"
+                id="officialPageURL"
+                class="form-control"
+                name="officialPageURL"
+                [(ngModel)]="event.officialPageURL"
+              />
+              <label for="officialPageURL">Link do oficjalnej strony</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="md-form">
+              <mdb-icon fas icon="info-circle" class="prefix"></mdb-icon>
+              <input
+                mdbInput
+                type="text"
+                id="extra"
+                class="form-control"
+                name="ExtraInformation"
+                [(ngModel)]="event.ExtraInformation"
+              />
+              <label for="extra">Dodatkowe informację</label>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <button
+    (click)="navigate()"
+    type="button"
+    class="btn btn-outline-info waves-effect py-2 px-3 fillButton mx-2"
+  >
+    Wróć
+  </button>
+  <button
+    type="submit"
+    [disabled]="evnt.form.invalid"
+    class="btn btn-outline-success waves-effect py-2 px-3 mx-2 fillButton"
+    (click)="saveAdvertisement()"
+  >
+    Zapisz
+  </button>
+</div>

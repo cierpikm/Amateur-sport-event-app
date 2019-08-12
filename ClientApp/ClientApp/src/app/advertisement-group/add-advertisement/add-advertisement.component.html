@@ -1,0 +1,223 @@
+<div class="container py-4 mt-5 ">
+  <div class="row justify-content-center">
+    <div class="col-sm-12 border shadow">
+      <form #add="ngForm">
+        <div class="form-row">
+          <div class="col-sm-6">
+            <div class="md-form">
+              <mdb-icon fab icon="accusoft" class="prefix"></mdb-icon>
+              <input
+                mdbInput
+                mdbValidate
+                type="text"
+                id="title"
+                class="form-control"
+                name="Title"
+                [(ngModel)]="advertisement.Title"
+                #title="ngModel"
+                required
+              />
+              <label for="title">Tytuł ogłoszenia</label>
+              <mdb-error *ngIf="title.invalid && (title.dirty || title.touched)"
+                >Tytuł jest wymagany.</mdb-error
+              >
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="md-form">
+              <select
+                name="SportType"
+                #SportType="ngModel"
+                class="browser-default custom-select"
+                [(ngModel)]="advertisement.SportType"
+                required
+              >
+                <option selected>Wybierz rodzaj sportu</option>
+                <option value="0">Piłka ręczna</option>
+                <option value="1">Tenis stołowy</option>
+                <option value="2">Bilard</option>
+                <option value="3">Pływanie</option>
+                <option value="4">Rower</option>
+                <option value="5">Badminton</option>
+                <option value="6">Baseball</option>
+                <option value="7">Piłka nożna</option>
+                <option value="8">Siatkówka</option>
+                <option value="9">Hokej</option>
+                <option value="10">Tenis ziemny</option>
+                <option value="11">Koszykówka</option>
+                <option value="12">Inny</option>
+              </select>
+              <div
+                *ngIf="
+                  SportType.invalid && (SportType.dirty || SportType.touched)
+                "
+                class="alert alert-danger"
+              ></div>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-sm-4">
+            <div class="md-form">
+              <select
+                class="browser-default custom-select "
+                name="LevelUser"
+                [(ngModel)]="advertisement.LevelUser"
+                required
+              >
+                <option selected>Wybierz poziom zawodników</option>
+                <option value="0">Podstawowy</option>
+                <option value="1">Średniozaawansowany</option>
+                <option value="2">Wysoki</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="md-form">
+              <mdb-icon fas icon="users" class="prefix"></mdb-icon>
+              <input
+                mdbInput
+                mdbValidate
+                type="number"
+                min="1"
+                id="age"
+                class="form-control"
+                name="AgeRange"
+                [(ngModel)]="advertisement.AgeRange"
+                required
+                #age="ngModel"
+              />
+              <label for="age">Minimalny wiek zawodników</label>
+              <mdb-error *ngIf="age.invalid && (age.dirty || age.touched)"
+                >Minimalny wiek jest wymagany.</mdb-error
+              >
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="md-form">
+              <label>
+                Data wydarzenia:
+                <input
+                  id="Date"
+                  [min]="min"
+                  [owlDateTimeTrigger]="dt7"
+                  [owlDateTime]="dt7"
+                  name="Date"
+                  [(ngModel)]="advertisement.Date"
+                  required
+                />
+                <owl-date-time [startAt]="startAt" #dt7></owl-date-time>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-7">
+            <div class="md-form">
+              <mdb-icon fas icon="city" class="prefix"></mdb-icon>
+              <input
+                mdbInput
+                mdbValidate
+                type="text"
+                id="city"
+                class="form-control"
+                name="City"
+                [(ngModel)]="advertisement.Localization.City"
+                required
+                #City="ngModel"
+              />
+              <label for="city">Miasto</label>
+              <mdb-error *ngIf="City.invalid && (City.dirty || City.touched)"
+                >Miasto jest wymagane.</mdb-error
+              >
+            </div>
+          </div>
+          <div class="col">
+            <div class="md-form">
+              <mdb-icon fas icon="road" class="prefix"></mdb-icon>
+              <input
+                mdbInput
+                mdbValidate
+                type="text"
+                id="street"
+                class="form-control"
+                name="Street"
+                [(ngModel)]="advertisement.Localization.Street"
+                required
+                #Street="ngModel"
+              />
+              <label for="street">Ulica</label>
+              <mdb-error *ngIf="Street.invalid && (Street.dirty || Street.touched)"
+                >Ulica jest wymagana.</mdb-error
+              >
+            </div>
+          </div>
+          <div class="col">
+            <div class="md-form">
+              <mdb-icon fas icon="list-ol" class="prefix"></mdb-icon>
+              <input
+                mdbInput
+                mdbValidate
+                type="number"
+                min="0"
+                id="number"
+                class="form-control"
+                name="StreetNumber"
+                [(ngModel)]="advertisement.Localization.StreetNumber"
+                required
+                #StreetNumber="ngModel"
+              />
+              <label for="numbr">Numer</label>
+              <mdb-error *ngIf="StreetNumber.invalid && (StreetNumber.dirty || StreetNumber.touched)"
+                >Numer jest wymagany.</mdb-error
+              >
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="md-form">
+              <mdb-icon fas icon="info-circle" class="prefix"></mdb-icon>
+              <input
+                mdbInput
+                mdbValidate
+                type="text"
+                id="extra"
+                class="form-control"
+                name="ExtraInformation"
+                [(ngModel)]="advertisement.ExtraInformation"
+                required
+                #ExtraInformation="ngModel"
+              />
+              <label for="extra">Dodatkowe informację</label>
+              <mdb-error
+                *ngIf="
+                  ExtraInformation.invalid &&
+                  (ExtraInformation.dirty || ExtraInformation.touched)
+                "
+                >Dodatkowe informację są wymagane.</mdb-error
+              >
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <button
+    (click)="navigate()"
+    type="button"
+    class="btn btn-outline-info waves-effect py-2 px-3 fillButton mx-2"
+  >
+    Wróć
+  </button>
+  <button
+    type="submit"
+    [disabled]="add.form.invalid"
+    class="btn btn-outline-success waves-effect py-2 px-3 mx-2 fillButton"
+    (click)="saveAdvertisement()"
+  >
+    Zapisz
+  </button>
+</div>

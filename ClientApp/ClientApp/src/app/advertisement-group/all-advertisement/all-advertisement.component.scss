@@ -1,0 +1,36 @@
+.display-detail{
+  text-align: center;
+}
+.display-detail .offer{
+  font-size:0.80rem;
+  height: 56px;
+}
+.display-detail .card-img {
+  width: 150px !important;
+  height:200px;
+  margin: auto auto;
+}
+.display-detail:hover .card-img-overlay{
+  display: block;
+}
+.display-detail .card-img-overlay{
+  display: none;
+  background: rgba(217,217,217,0.35);
+  padding-top: 25%;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+
+.display-detail .card-title a:hover{
+  color: #484848;
+  text-decoration: none;
+}
+.grow:hover {
+  -webkit-transition: transform 1.5s ease-in-out;
+  transform: scale(1.3);
+}
+.fill {
+position: relative;
+  right: 5%;
+}

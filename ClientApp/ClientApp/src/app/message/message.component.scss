@@ -1,0 +1,16 @@
+.example-viewport {
+  height: 100vh;
+}
+::-webkit-scrollbar {
+  width: 0px;
+}
+.fixed-row-bottom {
+  position: fixed;
+  bottom: 4px;
+}
+.fill {
+  height: 100vh;
+}
+textarea {
+ resize: none;
+}

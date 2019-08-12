@@ -1,0 +1,18 @@
+<div *ngFor="let advertisement of advertisements; index as i">
+  <div class="container " [hidden]="!(i === showedItem)">
+    <div class="row justify-content-center">
+      <button (click)="filtering()" type="button" class="btn btn-unique">
+        Wyszukaj ogłoszenia tylko w swoim mieście
+      </button>
+    </div>
+    <div class="row py-2 justify-content-center">
+      <div class="col-sm-6 border shadow mx-auto align-items-center py-2 pb-2 ">
+        <app-advertisement
+          (valueChange)="nextAdvertisement($event)"
+          [showedItem]="i"
+          [advertisement]="advertisement"
+        ></app-advertisement>
+      </div>
+    </div>
+  </div>
+</div>

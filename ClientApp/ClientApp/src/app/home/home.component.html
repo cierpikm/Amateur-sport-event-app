@@ -1,0 +1,64 @@
+<!--Main Navigation-->
+<header class="intro-header">
+  <!--Navbar-->
+  <mdb-navbar
+    SideClass="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar"
+  >
+    <mdb-navbar-brand>
+      <a class="logo navbar-brand waves-light" mdbWavesEffect href="#"
+        ><strong>Amateur Sport Event</strong></a
+      >
+    </mdb-navbar-brand>
+    <button
+      type="button"
+      class="btn btn-outline-white
+    btn-rounded waves-effect ml-auto"
+      (click)="openLogin()"
+    >
+      Zaloguj się
+    </button>
+  </mdb-navbar>
+
+  <!-- Intro Section -->
+  <div
+    class="view jarallax"
+    data-jarallax='{"speed": 0.2}'
+    style="background-image: url(https://b608751073891f8d126e-a2b3e4724500b934f5fe59eedc4554ed.ssl.cf1.rackcdn.com/CMPRO_SPORTS-2.jpg);"
+  >
+    <div class="full-bg-img mask rgba-black-light">
+      <div class="container flex-center">
+        <div class="row pt-5 mt-3 w-100">
+          <div class="col-md-12">
+            <div class="text-center">
+              <h2
+                class="h1 h1-reponsive white-text font-up font-bold mb-3 wow fadeInDown"
+                data-wow-delay="0.3s"
+              >
+                <strong>
+                  <em>
+                    Poznawaj nowych ludzi! Spędzaj aktywnie czas! Odkrywaj nowe
+                    sporty!</em
+                  ></strong
+                >
+              </h2>
+              <hr class="hr-light mt-4 wow fadeInDown" data-wow-delay="0.4s" />
+
+              <a
+                mdbBtn
+                btn-lg
+                color="white"
+                outline="true"
+                class="wow fadeInDown waves-light"
+                data-wow-delay="0.8s"
+                mdbWavesEffect
+                (click)="openRegister()"
+                >Zarejestruj się</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!--Main Navigation-->

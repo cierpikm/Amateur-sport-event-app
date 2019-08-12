@@ -1,0 +1,14 @@
+
+<h3>
+  Dane kontaktowe
+</h3>
+<br/>
+<p>Telefon: {{user.phoneNumber}}</p>
+<p>Email: {{user.email}}</p>
+
+<h3>Dane użytkownika</h3>
+<br/>
+<p>Miasto: {{user.city}}</p>
+<p>Preferowane sporty: </p>
+<p *ngFor="let item of user.prefferedSports" >{{toSportsEnum(item.vaule)}}</p>
+

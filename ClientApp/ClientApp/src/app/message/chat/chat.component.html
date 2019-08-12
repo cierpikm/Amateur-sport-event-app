@@ -1,0 +1,62 @@
+<cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
+  <div *ngFor="let item of chat.messages">
+    <div *ngIf="userId === item.sender.id; else templateName">
+      <div class="row py-2">
+        <div class="col-sm-2">
+          <img
+            src="https://mdbootstrap.com/img/Photos/Avatars/img(31).jpg"
+            class="mx-auto w-30 img-fluid z-depth-1 rounded-circle clickable"
+            alt="Responsive image"
+          />
+        </div>
+        <div class="col-sm-10 my-auto">
+          <div class="form-group shadow-textarea">
+            <textarea
+              class="form-control z-depth-1"
+              id="exampleFormControlTextarea6"
+              disabled="false"
+            >
+        {{ item.messageText }}</textarea
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #templateName>
+      <div class="row py-2">
+        <div class="col-sm-10 my-auto">
+          <div class="form-group shadow-textarea">
+            <textarea
+              class="form-control z-depth-1"
+              id="exampleFormControlTextarea6"
+              disabled="false"
+            >
+        {{ item.messageText }}</textarea
+            >
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <img
+            src="https://mdbootstrap.com/img/Photos/Avatars/img(31).jpg"
+            class="mx-auto w-30 img-fluid z-depth-1 rounded-circle clickable"
+            alt="Responsive image"
+          />
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</cdk-virtual-scroll-viewport>
+<div class="row border-top">
+  <input
+    type="text"
+    id="meessage"
+    class="form-control"
+    placeholder="Napisz wiadomość"
+    [(ngModel)]="messageText"
+  />
+</div>
+<div class="row">
+  <button (click)="sendMessage()">
+    Wyslij
+  </button>
+</div>

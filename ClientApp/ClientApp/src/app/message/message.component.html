@@ -1,0 +1,57 @@
+<div class="container fill">
+  <div class="row fill">
+    <div class="col-lg-12 border fill">
+      <div class="row fill">
+        <div class="col-sm-4 border-right fill">
+          <div class="row px-3 py-3">
+            <input
+              class="form-control"
+              type="text"
+              placeholder="Search"
+              aria-label="Search"
+            />
+          </div>
+          <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
+            <div
+              class="row py-2"
+              *ngFor="let item of chats"
+              (click)="getChat(item.id)"
+            >
+              <div class="col-sm-4">
+                <img
+                  src="https://mdbootstrap.com/img/Photos/Avatars/img(31).jpg"
+                  class="mx-auto w-30 img-fluid z-depth-1 rounded-circle clickable"
+                  alt="Responsive image"
+                />
+              </div>
+              <div class="col-sm-6 pl-1 my-auto">
+                <div class="row">
+                  {{ item.reciver.firstName }} {{ item.reciver.lastName }}
+                </div>
+                <div class="row">
+                  ostatnia wiadomosc?
+                </div>
+              </div>
+              <div class="col-sm-2 pl-0  ">
+                <div class="row py-2 pt-3">
+                  8:28 AM
+                </div>
+                <div class="row mx-auto">
+                  <span
+                    matBadge="2"
+                    matBadgeColor="warn"
+                    matBadgeSize="medium"
+                    matBadgeOverlap="false"
+                  ></span>
+                </div>
+              </div>
+            </div>
+          </cdk-virtual-scroll-viewport>
+        </div>
+        <div class="col-sm-8 ">
+          <app-chat *ngIf="chat; showChat" [chat]="chat"></app-chat>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,131 @@
+
+<div class="display-detail">
+  <div class="card">
+    <img class="card-img pt-3" src="assets/1.jpg" class="rounded img-fluid " />
+    <div class="card-img-overlay">
+      <p class="card-text text-center">
+        <span
+          type="button"
+          class="btn btn-dark mx-auto w-100"
+          data-toggle="modal"
+          data-target="#basicExample"
+          (click)="frame.show()"
+          >Zobacz więcej</span
+        >
+      </p>
+    </div>
+  </div>
+</div>
+<h2 class="text-center">{{ advertisement.title }}</h2>
+
+<p>
+  <i class="far fa-compass fa-1x"></i> {{ advertisement.localization.street }}
+  {{ advertisement.localization.streetNumber }},
+  {{ advertisement.localization.city }}
+</p>
+<p><i class="far fa-clock fa-1x"></i> {{ advertisement.date | date}}</p>
+<p type="date">
+  <i class="fas fa-futbol fa-1x"></i>
+  {{ toSportsEnum(advertisement.sportType) }}
+</p>
+<div class="text-center" [hidden]="ownAdvertisement">
+  <i
+    (click)="acceptedAdvertisement(advertisement.id)"
+    class="grow far fa-check-circle green-text fa-4x px-2 "
+  ></i>
+  <i
+    (click)="discardAdveritesement()"
+    class="grow fas fa-times-circle red-text fa-4x px-2"
+  ></i>
+</div>
+
+<div
+  mdbModal
+  #frame="mdbModal"
+  class="modal fade top"
+  id="frameModalTop"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-scrollable modal-notify modal-info"
+    role="document"
+  >
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p class="heading lead">Szczegółowe informacje</p>
+
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="frame.hide()"
+        >
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+        <div>
+          <mdb-icon
+            class="text-center"
+            fas
+            icon="check"
+            size="4x"
+            class="mb-3 animated rotateIn"
+          ></mdb-icon>
+
+          <p>Dodatkowe inforamcje</p>
+          <p class="text-center">
+            {{ advertisement.extraInformation }}
+          </p>
+          <hr />
+          <p>Wymagany poziom umiejętności</p>
+          <p class="text-center">
+            {{ toLevelUserEnum(advertisement.levelUser) }}
+          </p>
+          <hr />
+          <p>Minimalny wiek</p>
+          <p class="text-center">{{ advertisement.ageRange }}</p>
+          <hr />
+          <p>Dokładna data</p>
+          <p class="text-center">{{ advertisement.date | date:'medium' }}</p>
+          <hr />
+          <p>Osoba dodająca</p>
+          <div class="text-center">
+            <p>
+              {{ advertisement.userDTO.userName }}
+            </p>
+            <img  (click)="navigateToUser(advertisement.userDTO.userName)"
+              src="https://mdbootstrap.com/img/Photos/Avatars/img(31).jpg"
+              class="mx-auto w-40 img-fluid z-depth-1 rounded-circle clickable"
+              alt="Responsive image"
+            />
+          </div>
+          <hr />
+          <p>Zgłoszone osoby</p>
+          <div class="row text-center">
+            <div
+              class="col-md-4"
+              *ngFor="let eager of advertisement.eagerMembers"
+            >
+              <img (click)="navigateToUser(eager.userName)"
+                src="https://mdbootstrap.com/img/Photos/Avatars/img(31).jpg"
+                class="mx-auto w-75 img-fluid z-depth-1 rounded-circle clickable"
+                alt="Responsive image"
+              />
+              <p>{{ eager.userName }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>

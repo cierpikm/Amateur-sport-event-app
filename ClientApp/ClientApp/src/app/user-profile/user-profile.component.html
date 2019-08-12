@@ -1,0 +1,238 @@
+<div class="col-sm-12 border shadow ">
+  <!-- Edit Form -->
+  <form *ngIf="userProfile">
+    <div class="row justify-content-center  ">
+      <img
+        src="assets/default_profile_img.png"
+        class="rounded float-left"
+        style="width: 200px"
+      />
+      <div class="col-md-3 my-auto">
+        <div class="md-form ">
+          <input
+            mdbInput
+            type="text"
+            id="userName"
+            class="form-control validate"
+            name="userName"
+            placeholder="Login"
+            [(ngModel)]="userProfile.userName"
+            [disabled]="updateOff"
+          />
+          <label for="FirstName">Login</label>
+        </div>
+      </div>
+    </div>
+    <div
+      class="row justify-content-center text-center "
+      style="font-size: 14px;"
+    >
+      <div
+        class="col-md-3 border-0 shadow clickable"
+        (click)="onNavigateToUserProfile(userProfile.userName)"
+      >
+        Zobacz jak inni widzą Twój profil
+      </div>
+    </div>
+
+    <!-- First row -->
+
+    <div class="row">
+      <!-- First column -->
+      <div class="col-md-4">
+        <div class="md-form ">
+          <input
+            mdbInput
+            type="text"
+            id="FirstName"
+            class="form-control validate"
+            name="FirstName"
+            placeholder="Imię"
+            [(ngModel)]="userProfile.firstName"
+            [disabled]="updateOff"
+          />
+          <label for="FirstName">Imię</label>
+        </div>
+      </div>
+      <!-- SecondName column -->
+      <div class="col-md-5">
+        <div class="md-form mb-0">
+          <input
+            mdbInput
+            type="text"
+            id="secondName"
+            class="form-control validate"
+            name="SecondName"
+            placeholder="Nazwisko"
+            [(ngModel)]="userProfile.lastName"
+            [disabled]="updateOff"
+          />
+          <label for="secondName">Nazwisko</label>
+        </div>
+      </div>
+      <!-- Age column -->
+      <div class="col-md-2">
+        <div class="md-form mb-0">
+          <input
+            mdbInput
+            type="number"
+            id="age"
+            class="form-control validate"
+            name="Age"
+            placeholder="Wiek"
+            [(ngModel)]="userProfile.age"
+            [disabled]="updateOff"
+          />
+          <label for="age">Wiek</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- First column -->
+      <div class="col-md-3">
+        <div class="md-form ">
+          <input
+            mdbInput
+            type="number"
+            id="Phonenumber"
+            class="form-control validate"
+            name="PhoneNumber"
+            placeholder="Numer telefonu"
+            [(ngModel)]="userProfile.phoneNumber"
+            [disabled]="updateOff"
+          />
+          <label for="PhoneNumber">Numer telefonu</label>
+        </div>
+      </div>
+      <!-- SecondName column -->
+      <div class="col-md-5">
+        <div class="md-form mb-0">
+          <input
+            mdbInput
+            type="text"
+            id="Email"
+            class="form-control validate"
+            name="Email"
+            placeholder="Email"
+            [(ngModel)]="userProfile.email"
+            [disabled]="updateOff"
+          />
+          <label for="Email">Email</label>
+        </div>
+      </div>
+      <div class="col-md-3">
+          <div class="md-form mb-0">
+              <input
+                mdbInput
+                type="text"
+                id="City"
+                class="form-control validate"
+                name="City"
+                placeholder="Miasto"
+                [(ngModel)]="userProfile.city"
+                [disabled]="updateOff"
+              />
+              <label for="Email">Email</label>
+            </div>
+      </div>
+    </div>
+    <!-- Preffered sports -->
+    Preferowane sporty
+    <div class="row">
+      <ul
+        id="wrapper"
+        class=" px-2 list-group list-group-horizontal-lg"
+        *ngFor="let sport of userProfile.prefferedSports"
+      >
+        <li (click)="delete(sport.id)" class="list-group-item">
+          {{ toSportsEnum(sport.vaule) }}
+        </li>
+        <span [hidden]="updateOff" class="text">Usuń</span>
+      </ul>
+    </div>
+    <div class="row py-2">
+      <div class="col-sm-4">
+        <select
+          class="browser-default custom-select"
+          name="prefferedSport"
+          [(ngModel)]="selectedSport"
+          [hidden]="updateOff"
+        >
+          <option selected>Dodaj ulubione sporty</option>
+          <option value="0">Piłka ręczna</option>
+          <option value="1">Tenis stołowy</option>
+          <option value="2">Bilard</option>
+          <option value="3">Pływanie</option>
+          <option value="4">Rower</option>
+          <option value="5">Badminton</option>
+          <option value="6">Baseball</option>
+          <option value="7">Piłka nożna</option>
+          <option value="8">Siatkówka</option>
+          <option value="9">Hokej</option>
+          <option value="10">Tenis ziemny</option>
+          <option value="11">Koszykówka</option>
+        </select>
+      </div>
+      <div class="col-sm-4">
+        <button
+          [hidden]="updateOff"
+          (click)="addPrefferSport()"
+          type="button"
+          class="btn btn-outline-default waves-effect"
+        >
+          Dodaj
+        </button>
+      </div>
+    </div>
+
+    <!-- Third row -->
+    <div class="row">
+      <!-- First column -->
+      <div class="col-md-12">
+        <div class="md-form mb-0">
+          <textarea
+            mdbInput
+            type="text"
+            id="description"
+            name="Description"
+            placeholder="O mnie"
+            class="md-textarea form-control"
+            rows="1"
+            [(ngModel)]="userProfile.description"
+            [disabled]="updateOff"
+          ></textarea>
+          <label for="description">Opis</label>
+        </div>
+      </div>
+    </div>
+    <!-- Third row -->
+
+    <!-- Fourth row -->
+    <div class="row">
+      <div class="col-md-12 text-center my-4">
+        <span class="waves-input-wrapper waves-effect waves-light"
+          ><input
+            type="submit"
+            value="Zaktualizuj profil"
+            class="btn btn-info btn-rounded"
+            (click)="update()"
+        /></span>
+        <span class="waves-input-wrapper waves-effect waves-light"
+          ><input
+            type="submit"
+            value="Zapisz zmiany"
+            class="btn btn-info btn-rounded"
+            [hidden]="updateOff"
+            (click)="saveUpdate()"
+        /></span>
+      </div>
+    </div>
+    <!-- Fourth row -->
+  </form>
+</div>
+
+<!-- Default checked
+<option *ngFor="let sport of keys"  >
+  {{ sport }}
+</option> -->
