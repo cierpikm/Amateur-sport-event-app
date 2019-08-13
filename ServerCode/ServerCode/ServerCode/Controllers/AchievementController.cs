@@ -39,5 +39,10 @@ namespace ServerCode.Controllers
         {
             await _baseRepository.Delete(id);
         }
+        [HttpPost]
+        public async Task<int> UpdateAchievement(Achievement achievement)
+        {
+            return await _baseRepository.UpdateAdvertisement(achievement);
+        }
     }
 }

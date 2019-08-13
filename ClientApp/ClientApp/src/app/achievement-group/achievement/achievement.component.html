@@ -1,28 +1,47 @@
 <link
-  href="http://fonts.googleapis.com/css?family=Allura&subset=latin,latin-ext"
+  href="http://fonts.googleapis.com/css?family=Audiowide&subset=latin,latin-ext"
   rel="stylesheet"
   type="text/css"
 />
+
 <div class="container">
-  <div class="row py-2 justify-content-center" *ngFor="let item of achievements">
-    <div class="col-sm-9 border shadow py-2">
+  <div
+    class="row py-2 justify-content-center"
+    *ngFor="let item of achievements"
+  >
+    <div class="col-sm-10  border rounded shadow py-2">
       <div class="row">
         <div class="col-sm-7">
-          <h6
-            class="text-center"
-            style="font-family: 'Allura', sans-serif; font-size:40px;"
+          <h1
+            class="h1-responsive"
+            class="text-center pb-1 mb-0"
+            style="font-family: 'Audiowide', sans-serif;"
           >
             Osiągnięcie
-          </h6>
-          <p class="text-center">{{ item.title }}</p>
+          </h1>
+          <hr
+            class="pt-1 pb-1 my-0 pl-6 ml-6"
+            style="border-top: dotted 1px;"
+          />
+          <hr
+            class="pt-1 pb-1 my-0 pl-6 ml-6"
+            style="border-top: dotted 1px;"
+          />
+          <hr
+            class="pt-0 pb-3 my-0 pl-6 ml-6"
+            style="border-top: dotted 1px;"
+          />
+
+          <h4 class="text-center ">{{ item.title }}</h4>
+
           <div class="row justify-content-center my-auto mx-auto">
-            <div class="col-sm-6 align-items-end pl-0 mr-0 my-auto">
-              Zdobyte miejsce - {{ item.ranking }}
+            <div class="col-sm-6 text-right  pr-0  mr-0 my-auto">
+              Zdobyte {{ item.ranking }} miejsce
             </div>
             <div class="col-sm pl-0">
               <i
                 *ngIf="item.ranking === 1"
-                class="fas fa-medal fa-6x amber-text my-3"
+                class="fas fa-medal fa-6x amber-text my-3 "
               ></i>
               <i
                 *ngIf="item.ranking === 2"
@@ -35,22 +54,32 @@
             </div>
           </div>
           <div class="text-center">
-            <button class="btn peach-gradient" (click)="basicModal.show()">
+            <button class="btn btn-light-blue" (click)="basicModal.show()">
               Więcej
             </button>
           </div>
         </div>
-        <div class="col-sm text-center">
-          <img src="assets/cup_icon.png" class=" img-fluid w-75" />
+        <div class="col-sm  pl-2 ml-2 my-auto thumb">
+          <img
+            src="assets/cup_icon.png"
+            class="py-auto d-block w-75 img-fluid"
+          />
         </div>
       </div>
-      <div class="bottom-right" *ngIf="!onClickViewer">
-        <i class="far fa-edit fa-2x px-1 orange-text clickable"></i>
-        <i
-          (click)="deleteAchievement(item.id)"
-          class="far fa-trash-alt fa-2x px-1 red-text clickable"
-        ></i>
-      </div>
+      <span class="info">
+        <div class="bottom-right " *ngIf="!onClickViewer">
+          <i
+            class="far fa-edit fa-2x px-1 orange-text clickable "
+
+            (click)="basicModal2.show()"
+            (click)="updateAchievement(item)"
+          ></i>
+          <i
+            (click)="deleteAchievement(item.id)"
+            class="far fa-trash-alt fa-2x px-1 red-text clickable"
+          ></i>
+        </div>
+      </span>
     </div>
 
     <div
@@ -102,6 +131,7 @@
     <button
       type="button"
       *ngIf="!onClickViewer"
+      (click)="clearAchievement()"
       class="btn yellow-gradient btn-outline-warning ml-auto"
       (click)="basicModal2.show()"
     >
@@ -149,6 +179,8 @@
               <input
                 class="form-control my-2"
                 type="number"
+                min="1"
+                max="3"
                 placeholder="Zdobyte miejsce"
                 name="ranking"
                 [(ngModel)]="achievement.ranking"
@@ -172,6 +204,7 @@
             color="secondary"
             class="waves-light"
             aria-label="Close"
+            (click)="update = false"
             (click)="basicModal2.hide()"
             mdbWavesEffect
           >
@@ -183,9 +216,21 @@
             color="primary"
             class="relative waves-light"
             mdbWavesEffect
+            *ngIf="!update"
             (click)="addAchievement()"
           >
             Zapisz
+          </button>
+          <button
+            type="button"
+            mdbBtn
+            color="primary"
+            class="relative waves-light"
+            mdbWavesEffect
+            *ngIf="update"
+            (click)="saveAchievement()"
+          >
+            Zaktualizuj
           </button>
         </div>
       </div>

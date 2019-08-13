@@ -14,4 +14,7 @@ export class AchievementService {
   deleteAchievement(id) {
     return this.http.delete(this.url + 'DeleteAchievement/' + id);
   }
+  updateAchievement(achievement) {
+    return this.http.post(this.url + 'UpdateAchievement', achievement);
+  }
 }

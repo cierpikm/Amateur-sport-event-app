@@ -1,0 +1,7 @@
+span {
+  display: none;
+}
+
+a:hover + span {
+  display: block;
+}

@@ -4,11 +4,32 @@
   bottom: 5%;
 }
 
-.bottom-right{
+.bottom-right {
   position: absolute;
   bottom: 20px;
   right: 20px;
 }
-.clickable:hover{
+.clickable:hover {
   cursor: pointer;
+}
+.border {
+  background-image: url(src/assets/achievement-texture.jpg);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.info {
+  opacity: 0;
+}
+
+.info:hover {
+  opacity: 1;
+}
+img {
+  -webkit-filter: drop-shadow(4px 4px 4px #222);
+  filter: drop-shadow(4px 4px 4px #222);
+}
+i {
+  -webkit-filter: drop-shadow(2px 2px 2px #222);
+  filter: drop-shadow(2px 2px 2px #222);
 }
