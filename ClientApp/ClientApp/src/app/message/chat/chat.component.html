@@ -1,44 +1,63 @@
-<cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
+<cdk-virtual-scroll-viewport itemSize="50" class="example-viewport px-2">
   <div *ngFor="let item of chat.messages">
     <div *ngIf="userId !== item.reciver.id; else templateName">
-      <div class="row py-2">
-        <div class="col-sm-2">
+      <div class="row py-2 px-2">
+        <div class="col-sm-2 py-auto my-auto pr-0">
           <img
             src="https://mdbootstrap.com/img/Photos/Avatars/img(31).jpg"
-            class="mx-auto w-30 img-fluid z-depth-1 rounded-circle clickable"
+            class="mx-auto  w-75 img-fluid z-depth-1 rounded-circle clickable"
             alt="Responsive image"
           />
         </div>
-        <div class="col-sm-10 my-auto">
-          <div class="form-group shadow-textarea">
+        <div class="col-sm-8 my-auto">
+          <mat-form-field style="width: 95%; color:#ffbb33;" class="pr-6">
             <textarea
-              class="form-control z-depth-1"
-              id="exampleFormControlTextarea6"
-              disabled="false"
+              matInput
+              readonly
+              cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize"
             >
-        {{ item.messageText }}</textarea
+              {{ item.messageText }}
+                </textarea
             >
-          </div>
+          </mat-form-field>
+          <i>
+            {{ item.dateSendMessage | date: "E," }}
+            {{ item.dateSendMessage | date: "shortTime" }}
+          </i>
         </div>
+        <div class="col-sm-2"></div>
       </div>
     </div>
     <ng-template #templateName>
       <div class="row py-2">
-        <div class="col-sm-10 my-auto">
-          <div class="form-group shadow-textarea">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 my-auto">
+          <mat-form-field
+            style="width: 95%; scroll-margin-bottom: 0px; color:#3F729B;"
+          >
             <textarea
-              class="form-control z-depth-1"
-              id="exampleFormControlTextarea6"
-              disabled="false"
+              class="text-right"
+              matInput
+              readonly
+              cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize"
             >
-        {{ item.messageText }}</textarea
+                {{ item.messageText }}
+                    </textarea
             >
+          </mat-form-field>
+          <div class="row justify-content-end mx-0 pr-4">
+            <i>
+              {{ item.dateSendMessage | date: "E," }}
+              {{ item.dateSendMessage | date: "shortTime" }}
+            </i>
           </div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-2 py-auto my-auto pl-0 ">
           <img
             src="https://mdbootstrap.com/img/Photos/Avatars/img(31).jpg"
-            class="mx-auto w-30 img-fluid z-depth-1 rounded-circle clickable"
+            class="mx-auto w-75 img-fluid z-depth-1 rounded-circle clickable"
             alt="Responsive image"
           />
         </div>
@@ -46,17 +65,22 @@
     </ng-template>
   </div>
 </cdk-virtual-scroll-viewport>
-<div class="row border-top">
-  <input
-    type="text"
-    id="meessage"
-    class="form-control"
-    placeholder="Napisz wiadomość"
-    [(ngModel)]="messageText"
-  />
-</div>
-<div class="row">
-  <button (click)="sendMessage()">
-    Wyslij
-  </button>
+<div class="row px-2">
+  <div class="col-sm-10">
+    <input
+      type="text"
+      id="meessage"
+      class="form-control"
+      placeholder="Napisz wiadomość"
+      #sendInput
+      [(ngModel)]="messageText"
+    />
+  </div>
+  <div class="col-sm-2 px-auto my-auto">
+    <a
+      (click)="sendInput.value = ''"
+      (click)="sendMessage()"
+      class="fas fa-2x fa-angle-double-right"
+    ></a>
+  </div>
 </div>

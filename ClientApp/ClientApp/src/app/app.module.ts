@@ -39,7 +39,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import { MatInputModule } from '@angular/material/input';
 import { LOCALE_ID } from '@angular/core';
 import {MatDialogModule} from '@angular/material/dialog';
-
+import {MatIconModule} from '@angular/material/icon';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { registerLocaleData } from '@angular/common';
 import localePl from '@angular/common/locales/pl';
@@ -95,7 +95,8 @@ registerLocaleData(localePl, 'pl');
     ScrollingModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule
   ],
   providers: [
     UserService,
