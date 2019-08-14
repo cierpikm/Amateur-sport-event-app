@@ -16,7 +16,7 @@ export class ChatComponent implements OnInit {
 
   ngOnInit() {
     this.connection = new HubConnectionBuilder()
-    .withUrl('https://localhost:44378/chatHub', {accessTokenFactory: () => localStorage.getItem('token')})
+    .withUrl('https://localhost:44352/chatHub', {accessTokenFactory: () => localStorage.getItem('token')})
     .build();
 
     this.connection.on('SendMessage', data => {
@@ -29,14 +29,14 @@ export class ChatComponent implements OnInit {
     .catch(err => console.log('Error while establishing connection :('));
 
     this.connection.on('send', (MessageText, SenderId, ReciverId, ChatId) => {
-      if (ReciverId === localStorage.getItem('userId')) {
+      if (ReciverId === this.userId) {
         ReciverId = this.chat.owner.id;
       } else {
         ReciverId = this.chat.reciver.id;
       }
       const message = {
         messageText: MessageText,
-        sender: {id: localStorage.getItem('userId')},
+        sender: {id: this.userId},
         reciver: {id: ReciverId},
         chatId: ChatId
       };
@@ -47,7 +47,7 @@ export class ChatComponent implements OnInit {
 
    sendMessage() {
     let reciverId;
-    if (this.chat.reciver.id === localStorage.getItem('userId')) {
+    if (this.chat.reciver.id === this.userId) {
        reciverId = this.chat.owner.id;
     } else {
       reciverId =  this.chat.reciver.id;
@@ -55,14 +55,14 @@ export class ChatComponent implements OnInit {
 
     const message = {
       messageText: this.messageText,
-      sender: {id: localStorage.getItem('userId')},
+      sender: {id: this.userId},
       reciver: {id: reciverId},
       chatId: this.chat.id
     };
     this.chat.messages.push(message);
     const message2 = {
       messageText: this.messageText,
-      senderId: localStorage.getItem('userId'),
+      senderId: this.userId,
       reciverId :reciverId,
       chatId: this.chat.id
     };

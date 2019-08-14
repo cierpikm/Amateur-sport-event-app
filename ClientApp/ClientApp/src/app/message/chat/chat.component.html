@@ -1,6 +1,6 @@
 <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
   <div *ngFor="let item of chat.messages">
-    <div *ngIf="userId === item.sender.id; else templateName">
+    <div *ngIf="userId !== item.reciver.id; else templateName">
       <div class="row py-2">
         <div class="col-sm-2">
           <img

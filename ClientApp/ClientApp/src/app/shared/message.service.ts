@@ -13,4 +13,7 @@ export class MessageService {
   sendMessage(message) {
     return this.http.post(this.url + '/SendMessage', message);
   }
+  openChat(chatUsers) {
+    return this.http.post(this.url + '/OpenChat', chatUsers);
+  }
 }

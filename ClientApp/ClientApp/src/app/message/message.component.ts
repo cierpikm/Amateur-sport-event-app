@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 export class MessageComponent implements OnInit {
   chat;
   showChat = false;
-
+  owner = false;
   chats = [];
 
   constructor(private messageService: MessageService) {}
@@ -34,8 +34,6 @@ export class MessageComponent implements OnInit {
         console.log(error);
       }
     );
-
-
   }
   getChat(chatId) {
     this.messageService.getChat(chatId).subscribe(
@@ -49,4 +47,10 @@ export class MessageComponent implements OnInit {
     );
     this.showChat = true;
   }
+  checkOwner(ownerId) {
+      if (ownerId === localStorage.getItem('userId')) {
+        this.owner = true;
+   }
+      return true;
+ }
 }
