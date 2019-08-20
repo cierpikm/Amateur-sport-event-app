@@ -73,7 +73,10 @@
       class="form-control"
       placeholder="Napisz wiadomość"
       #sendInput
+      (keyup.enter)="sendInput.value=''"
       [(ngModel)]="messageText"
+      (keyup.enter)="sendMessage()"
+
     />
   </div>
   <div class="col-sm-2 px-auto my-auto">

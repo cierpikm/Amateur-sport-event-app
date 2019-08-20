@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using ServerCode.Model;
 using ServerCode.Model.DTOs;
+using ServerCode.Model.Helpers;
 using ServerCode.Model.Interfaces;
 
 namespace ServerCode.Controllers
@@ -64,19 +65,29 @@ namespace ServerCode.Controllers
                 return BadRequest(exc.Message);
             }
         }
-        [HttpPost]
         [Authorize]
-        public async Task<IActionResult> ChangePassword(LoginModel model)
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePassword changePassword)
         {
-            var user = await _userManager.FindByNameAsync(model.UserName);
-            if (user == null)
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                return ValidationProblem(ModelState);
             }
-            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-            var result = await _userManager.ResetPasswordAsync(user, token, model.Password);
-            return Ok(new { token });
+            try
+            {
+                var user = await _userManager.FindByIdAsync(changePassword.UserId);
+                await _userManager.ChangePasswordAsync(user, changePassword.OldPassword, changePassword.NewPassword);
+                return Ok();
+            }
+            catch (ArgumentNullException exception)
+            {
+                return NotFound(exception.Message);
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
 
+            }
         }
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel model)
