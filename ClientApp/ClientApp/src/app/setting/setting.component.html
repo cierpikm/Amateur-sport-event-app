@@ -3,10 +3,77 @@
   <h3 class="text-center">Zmień hasło</h3>
   <div class="row">
     <div class="col-sm-4  mx-auto align-items-center">
-      <label for="oldPassword">Stare hasło</label>
-      <input type="password" id="oldPassword" class="form-control" />
-      <label for="newPassword">Nowe hasło</label>
-      <input type="password" id="newPassword" class="form-control" />
+      <form #form="ngForm">
+        <div class="md-form">
+          <label for="oldPassword">Login</label>
+          <input
+            mdbInput
+            mdbValidate
+            type="text"
+            id="login"
+            class="form-control"
+            name="UserName"
+            [(ngModel)]="changePasswordModel.UserName"
+            #username="ngModel"
+            required
+          />
+          <mdb-error
+            *ngIf="username.invalid && (username.dirty || username.touched)"
+            >Login niepoprawny</mdb-error
+          >
+        </div>
+        <div class="md-form">
+          <label for="oldPassword">Stare hasło</label>
+          <input
+            mdbInput
+            mdbValidate
+            type="password"
+            id="oldPassword"
+            class="form-control"
+            name="OldPassword"
+            [(ngModel)]="changePasswordModel.OldPassword"
+            required
+            minlength="6"
+            #oldPassword="ngModel"
+          />
+          <mdb-error
+            *ngIf="
+              oldPassword.invalid && (oldPassword.dirty || oldPassword.touched)
+            "
+            >Hasło musi składać się z 6 znaków.</mdb-error
+          >
+        </div>
+        <div class="md-form">
+          <label for="newPassword">Nowe hasło</label>
+          <input
+            mdbInput
+            mdbValidate
+            type="password"
+            id="newPassword"
+            class="form-control"
+            name="NewPassword"
+            [(ngModel)]="changePasswordModel.NewPassword"
+            required
+            minlength="6"
+            #newPassword="ngModel"
+          />
+          <mdb-error
+            *ngIf="
+              newPassword.invalid && (newPassword.dirty || newPassword.touched)
+            "
+            >Hasło musi składać się z 6 znaków.</mdb-error
+          >
+        </div>
+      </form>
+      <div [hidden]="!postError" class="alert alert-danger">
+        {{ postErrorMessage }}
+      </div>
+      <div [hidden]="!success" class="alert alert-success">
+          Hasło zostało zmienione poprawnie.
+        </div>
+      <button type="submit" class="btn" (click)="changePassword()">
+        Zapisz
+      </button>
     </div>
   </div>
   <br />

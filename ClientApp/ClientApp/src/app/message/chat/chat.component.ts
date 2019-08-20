@@ -72,7 +72,7 @@ export class ChatComponent implements OnInit {
       chatId: this.chat.id
     };
     this.chat.messages.push(message);
-    const lenht = this.chat.messages.length;
+    const length = this.chat.messages.length;
     const message2 = {
       messageText: this.messageText,
       dateSendMessage: actualDate,
@@ -84,7 +84,7 @@ export class ChatComponent implements OnInit {
       data => {
         console.log(data);
 
-        this.virtualScrollViewport.scrollToIndex(this.chat.messages.length, 'smooth');
+        this.virtualScrollViewport.scrollToIndex(length, 'smooth');
 
       },
       err => {

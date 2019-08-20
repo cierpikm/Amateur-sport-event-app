@@ -29,4 +29,7 @@ export class UserService {
   deletePrefferSport(id) {
     return this.httpClient.delete(this.urlPostUser + '/PrefferedSports/Delete/' + id);
   }
+  changePassword(changePassword) {
+    return this.httpClient.post(this.urlPostUser + '/User/ChangePassword', changePassword, {headers: this.tokenHeader});
+  }
 }

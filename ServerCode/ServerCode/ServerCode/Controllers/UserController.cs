@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Authentication;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -75,9 +76,9 @@ namespace ServerCode.Controllers
             }
             try
             {
-                var user = await _userManager.FindByIdAsync(changePassword.UserId);
-                await _userManager.ChangePasswordAsync(user, changePassword.OldPassword, changePassword.NewPassword);
-                return Ok();
+                var user = await _userManager.FindByNameAsync(changePassword.Username);
+                var result = await _userManager.ChangePasswordAsync(user, changePassword.OldPassword, changePassword.NewPassword);
+                return Ok(result);
             }
             catch (ArgumentNullException exception)
             {
