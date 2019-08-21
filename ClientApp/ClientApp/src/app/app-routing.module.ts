@@ -1,3 +1,4 @@
+import { AdvertisementHistoryComponent } from './advertisement-group/advertisement-history/advertisement-history.component';
 import { AddEventsComponent } from './events-group/add-events/add-events.component';
 import { UsersComponent } from './users/users.component';
 import { AcceptedAdvertisementComponent } from './advertisement-group/accepted-advertisement/accepted-advertisement.component';
@@ -37,6 +38,7 @@ const routes: Routes = [
     {path: 'events', component: EventsComponent, canActivate: [AuthGuard]},
     {path: 'addEvent', component: AddEventsComponent, canActivate: [AuthGuard]},
     {path: 'users/:userName', component: UsersComponent, canActivate: [AuthGuard]},
+    {path: 'historyAdvertisement', component: AdvertisementHistoryComponent, canActivate: [AuthGuard]}
 
   ]},
 ];

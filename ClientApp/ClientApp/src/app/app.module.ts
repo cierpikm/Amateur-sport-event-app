@@ -1,3 +1,4 @@
+import { AdvertisementHistoryService } from './shared/advertisementHistory.service';
 import { MessageService } from './shared/message.service';
 import { EventService } from './shared/event.service';
 import { AchievementService } from './shared/achievement.service';
@@ -45,6 +46,7 @@ import { registerLocaleData } from '@angular/common';
 import localePl from '@angular/common/locales/pl';
 import { ChatComponent } from './message/chat/chat.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { AdvertisementHistoryComponent } from './advertisement-group/advertisement-history/advertisement-history.component';
 
 registerLocaleData(localePl, 'pl');
 
@@ -79,7 +81,8 @@ registerLocaleData(localePl, 'pl');
     GalleryComponent,
     UsersDataComponent,
     AddEventsComponent,
-    ChatComponent
+    ChatComponent,
+    AdvertisementHistoryComponent
   ],
   imports: [
     MatBadgeModule,
@@ -102,6 +105,7 @@ registerLocaleData(localePl, 'pl');
     UserService,
     AdvertisementService,
     AchievementService,
+    AdvertisementHistoryService,
     EventService,
     MessageService,
     {provide: LOCALE_ID, useValue: 'pl-PL'}

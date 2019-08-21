@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using ServerCode.Model.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +19,7 @@ namespace ServerCode.Model.Database
         public DbSet<Sponsor> Sponsors { get; set; }
         public DbSet<Chat> Chats { get; set; }
         public DbSet<Message> Messages { get; set; }
-        public DbSet<AdvertisementArch> AdvertisementArches { get; set; }
-        public DbSet<AdvertisementActual> AdvertisementActuals { get; set; }
+
    
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) :base(options)
@@ -40,9 +38,6 @@ namespace ServerCode.Model.Database
             builder.Entity<UserAdvertisement>().HasOne(ua => ua.User).WithMany(u => u.AdvertisementsAccepted).HasForeignKey(ua => ua.UserId);
             builder.Entity<UserAdvertisement>().HasOne(ua => ua.Advertisement).WithMany(u => u.EagerMembers).HasForeignKey(ua => ua.AdvertisementId);
             builder.Entity<Advertisement>().HasOne(a => a.Localization).WithOne().HasForeignKey<Localization>(a => a.AdvertisementId);
-            builder.Entity<AdvertisementArch>().ToTable("AdvertisementArchs");
-            builder.Entity<AdvertisementActual>().ToTable("AdvertisementActuals");
-
         }
     }
 }

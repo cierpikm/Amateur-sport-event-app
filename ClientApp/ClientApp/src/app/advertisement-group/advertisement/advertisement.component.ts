@@ -1,7 +1,7 @@
 import { AdvertisementService } from '../../shared/advertisement.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Sports } from '../../data/sports';
-import { LevelUser } from '../../data/levelUser';
+import { Sports } from '../../models/sports';
+import { LevelUser } from '../../models/levelUser';
 import { Router } from '@angular/router';
 
 

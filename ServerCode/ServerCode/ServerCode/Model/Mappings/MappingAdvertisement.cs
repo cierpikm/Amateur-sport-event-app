@@ -26,8 +26,12 @@ namespace ServerCode.Model.Mappings
                 .ForMember(c => c.Owner, o => o.MapFrom(d => d.Owner))
                 .ForMember(c => c.Reciver, o => o.MapFrom(d => d.Reciver))
                 .ForMember(c => c.Messages, o => o.MapFrom(c => c.Messages));
-            CreateMap<Advertisement, AdvertisementArch>()
-                .ForMember(c => c.Id, o => o.Ignore());
+            CreateMap<Advertisement, Advertisement>()
+               .ForMember(c => c.Id, o => o.Ignore())
+               .ForMember(c => c.Localization, o => o.Ignore())
+
+               .ForMember(c => c.UserId, o => o.Ignore())
+               ;
         }
     }
 }

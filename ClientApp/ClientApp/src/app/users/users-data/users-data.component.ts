@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Sports } from 'src/app/data/sports';
+import { Sports } from 'src/app/models/sports';
 
 
 @Component({

@@ -14,6 +14,7 @@ export class SideNavbarComponent implements OnInit {
   Logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
+    localStorage.removeItem('city');
     this.router.navigateByUrl('/');
   }
 

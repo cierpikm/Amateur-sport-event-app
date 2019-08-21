@@ -33,7 +33,7 @@ namespace ServerCode.Controllers
             await _messageRepository.AddMessage(message);
             await _messageHub.Clients
                .User(message.ReciverId)
-               .SendAsync("send", message.MessageText, message.SenderId, message.ReciverId, message.ChatId, message.dateSendMessage);
+               .SendAsync("send", message);
             return Ok();
         }
         [HttpPost]

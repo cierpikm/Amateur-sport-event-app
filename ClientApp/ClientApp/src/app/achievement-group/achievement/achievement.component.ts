@@ -26,26 +26,18 @@ export class AchievementComponent implements OnInit {
   addAchievement() {
     this.achievementService.addAchievement(this.achievement).subscribe(
       data => {
-        console.log(data);
         this.router
           .navigateByUrl('/user/achievement', { skipLocationChange: true })
           .then(() => this.router.navigate(['/user/ownAchievement']));
-      },
-      error => {
-        console.log(error);
       }
     );
   }
   deleteAchievement(id) {
     this.achievementService.deleteAchievement(id).subscribe(
       data => {
-        console.log(data);
         this.router
           .navigateByUrl('/user/achievement', { skipLocationChange: true })
           .then(() => this.router.navigate(['/user/ownAchievement']));
-      },
-      error => {
-        console.log(error);
       }
     );
   }
@@ -64,13 +56,9 @@ export class AchievementComponent implements OnInit {
   saveAchievement() {
     this.achievementService.updateAchievement(this.achievement).subscribe(
       data => {
-        console.log(data);
         this.router
           .navigateByUrl('/user/achievement', { skipLocationChange: true })
           .then(() => this.router.navigate(['/user/ownAchievement']));
-      },
-      error => {
-        console.log(error);
       }
     );
   }

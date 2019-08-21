@@ -1,7 +1,7 @@
-import { Localization } from './../../data/localization';
+import { Localization } from '../../models/localization';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Advertisement } from 'src/app/data/advertisement';
+import { Advertisement } from 'src/app/models/advertisement';
 import { AdvertisementService } from 'src/app/shared/advertisement.service';
 
 @Component({

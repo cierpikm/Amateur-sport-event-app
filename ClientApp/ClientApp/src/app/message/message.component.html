@@ -1,8 +1,8 @@
-<div class="container ">
-  <div class="row py-3 ">
-    <div class="col-lg-11 border mx-auto ">
-      <div class="row ">
-        <div class="col-sm-4 border-right ">
+<div class="container fill">
+  <div class="row py-3 fill">
+    <div class="col-lg-11 border mx-auto fill">
+      <div class="row fill">
+        <div class="col-sm-4 border-right fill">
           <div class="row px-3 py-3">
             <input
               class="form-control"
@@ -11,59 +11,76 @@
               aria-label="Search"
             />
           </div>
-          <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
-            <a>
-              <div
-                class="row py-2"
-                *ngFor="let item of chats"
-                (click)="getChat(item.id)"
+          <div class="row fill">
+            <div class="col fill">
+              <cdk-virtual-scroll-viewport
+                itemSize="30"
+                class="example-viewport"
               >
-                <div class="col-sm-3">
-                  <img
-                    src="https://mdbootstrap.com/img/Photos/Avatars/img(31).jpg"
-                    class="mx-auto w-30 img-fluid z-depth-1 rounded-circle clickable"
-                    alt="Responsive image"
-                  />
-                </div>
-                <div
-                  class="col-sm-6 pl-1 my-auto"
-                  *ngIf="checkOwner(item.owner.id)"
-                >
-                  <div class="row" *ngIf="owner">
-                    {{ item.reciver.firstName }} {{ item.reciver.lastName }}
+                <a>
+                  <div
+                    class="row py-2"
+                    *ngFor="let item of chats"
+                    (click)="getChat(item.id)"
+                  >
+                    <div class="col-sm-3">
+                      <img
+                        src="https://mdbootstrap.com/img/Photos/Avatars/img(31).jpg"
+                        class="mx-auto w-30 img-fluid z-depth-1 rounded-circle clickable"
+                        alt="Responsive image"
+                      />
+                    </div>
+                    <div
+                      class="col-sm-6 pl-1 my-auto"
+                      *ngIf="checkOwner(item.owner.id)"
+                    >
+                      <div class="row" *ngIf="owner">
+                        {{ item.reciver.firstName }} {{ item.reciver.lastName }}
+                      </div>
+                      <div class="row" *ngIf="!owner">
+                        {{ item.owner.firstName }} {{ item.owner.lastName }}
+                      </div>
+                      <div class="row">
+                        <i *ngIf="item.messages && item.messages.length > 0"
+                          >{{
+                            item.messages[item.messages.length - 1].messageText
+                              .length > 12
+                              ? (item.messages[item.messages.length - 1]
+                                  .messageText | slice: 0:12) + ".."
+                              : item.messages[item.messages.length - 1]
+                                  .messageText
+                          }}
+                        </i>
+                      </div>
+                    </div>
+                    <div class="col-sm-3 pl-0  ">
+                      <div
+                        class="row py-2 px-0"
+                        *ngIf="item.messages && item.messages.length > 0"
+                      >
+                        {{
+                          item.messages[item.messages.length - 1]
+                            .dateSendMessage | date: "E"
+                        }}
+                        {{
+                          item.messages[item.messages.length - 1]
+                            .dateSendMessage | date: "shortTime"
+                        }}
+                      </div>
+                      <div class="row mx-auto">
+                        <span
+                          matBadge="2"
+                          matBadgeColor="warn"
+                          matBadgeSize="medium"
+                          matBadgeOverlap="false"
+                        ></span>
+                      </div>
+                    </div>
                   </div>
-                  <div class="row" *ngIf="!owner">
-                    {{ item.owner.firstName }} {{ item.owner.lastName }}
-                  </div>
-                  <div class="row">
-                    <i
-                      >{{
-                        item.messages[item.messages.length - 1].messageText
-                          .length > 12
-                          ? (item.messages[item.messages.length - 1]
-                              .messageText | slice: 0:12) + ".."
-                          : item.messages[item.messages.length - 1].messageText
-                      }}
-                    </i>
-                  </div>
-                </div>
-                <div class="col-sm-3 pl-0  ">
-                  <div class="row py-2 px-0">
-                      {{item.messages[item.messages.length - 1].dateSendMessage | date:"E"}}
-                      {{item.messages[item.messages.length - 1].dateSendMessage | date:"shortTime"}}
-                  </div>
-                  <div class="row mx-auto">
-                    <span
-                      matBadge="2"
-                      matBadgeColor="warn"
-                      matBadgeSize="medium"
-                      matBadgeOverlap="false"
-                    ></span>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </cdk-virtual-scroll-viewport>
+                </a>
+              </cdk-virtual-scroll-viewport>
+            </div>
+          </div>
         </div>
         <div class="col-sm-8 px-0 ">
           <app-chat *ngIf="chat; showChat" [chat]="chat"></app-chat>

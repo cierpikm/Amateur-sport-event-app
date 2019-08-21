@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServerCode.Model.Database;
 
-namespace ServerCode.Migrations
+namespace ServerCode.Migrations.Database
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20190812192447_amateurSport")]
-    partial class amateurSport
+    [Migration("20190820184650_amateurSport1")]
+    partial class amateurSport1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -303,6 +303,8 @@ namespace ServerCode.Migrations
 
                     b.Property<string>("SenderId");
 
+                    b.Property<DateTime>("dateSendMessage");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ChatId");
@@ -388,15 +390,6 @@ namespace ServerCode.Migrations
                     b.Property<string>("LastName");
 
                     b.HasDiscriminator().HasValue("User");
-                });
-
-            modelBuilder.Entity("ServerCode.Model.AdvertisementArch", b =>
-                {
-                    b.HasBaseType("ServerCode.Model.Advertisement");
-
-                    b.ToTable("AdvertisementArchs");
-
-                    b.HasDiscriminator().HasValue("AdvertisementArch");
                 });
 
             modelBuilder.Entity("ServerCode.Model.Event", b =>

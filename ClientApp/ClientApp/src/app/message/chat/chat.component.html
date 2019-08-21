@@ -1,6 +1,6 @@
-<cdk-virtual-scroll-viewport itemSize="50" class="example-viewport px-2">
-  <div *ngFor="let item of chat.messages">
-    <div *ngIf="userId !== item.reciver.id; else templateName">
+<cdk-virtual-scroll-viewport itemSize="50" class="example-viewport px-2 fill">
+  <div *ngFor="let item of chat.messages" #messages>
+    <div *ngIf="userId !== item.reciverId; else templateName">
       <div class="row py-2 px-2">
         <div class="col-sm-2 py-auto my-auto pr-0">
           <img
@@ -10,7 +10,7 @@
           />
         </div>
         <div class="col-sm-8 my-auto">
-          <mat-form-field style="width: 95%; color:#ffbb33;" class="pr-6">
+          <mat-form-field style="width: 95%; color:#ffbb33; " class="pr-6">
             <textarea
               matInput
               readonly

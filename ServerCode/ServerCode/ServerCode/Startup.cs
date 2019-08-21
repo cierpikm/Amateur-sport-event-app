@@ -33,6 +33,7 @@ namespace ServerCode
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             var dbConnectionString = @"Server=(localdb)\mssqllocaldb;Database=AmateurSportsEvents;Trusted_Connection=True";
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(dbConnectionString));
+            services.AddDbContext<DatabaseHistoryContext>(options => options.UseSqlServer(dbConnectionString));
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAdvertisementRepository, AdvertisementRepository>();
             services.AddScoped<IBaseRepository<Achievement>, AchievementRepository>();
@@ -40,7 +41,7 @@ namespace ServerCode
             services.AddScoped<IBaseRepository<Event>, EventRepository>();
             services.AddScoped<IBaseRepository<Sponsor>, SponsorRepository>();
             services.AddScoped<IMessageRepository, MessageRepository>();
-            services.AddScoped<IBaseRepository<AdvertisementArch>, AdvertisementArchRepository>();
+            services.AddScoped<IAdvertisementRepositoryHistory, AdvertisementArchRepository>();
             services.AddDefaultIdentity<User>().AddEntityFrameworkStores<DatabaseContext>();
 
             services.Configure<IdentityOptions>(options =>

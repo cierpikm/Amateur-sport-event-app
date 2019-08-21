@@ -14,7 +14,6 @@ export class SettingComponent implements OnInit {
   constructor(private userService: UserService) { }
   changePasswordModel = {
     UserId: localStorage.getItem('userId'),
-    UserName: '',
     OldPassword: '',
     NewPassword: '',
   };

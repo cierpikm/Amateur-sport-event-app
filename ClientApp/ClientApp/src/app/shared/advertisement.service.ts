@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserService } from './user.service';
-import { Advertisement } from '../data/advertisement';
+import { Advertisement } from '../models/advertisement';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
@@ -9,7 +9,6 @@ export class AdvertisementService {
   url = 'https://localhost:44352/api';
   constructor(
     private http: HttpClient,
-    private userSrvice: UserService,
     private _snackBar: MatSnackBar
   ) {}
   getAllAdvertisement(city, userId) {

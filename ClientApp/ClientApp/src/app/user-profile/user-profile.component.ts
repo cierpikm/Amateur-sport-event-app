@@ -1,10 +1,8 @@
-import { UserProfile } from './../data/userProfile';
 import { UserService } from './../shared/user.service';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Sports } from '../data/sports';
 import { Router } from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { Sports } from '../models/sports';
 
 @Component({
   selector: 'app-user-profile',
@@ -25,17 +23,17 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
     this.userService.getUserProfile().subscribe(
       data => {
-        this.userService.userProfile = data;
         this.userProfile = data;
         localStorage.setItem('city', this.userProfile.city);
-        console.log(this.userService.userProfile);
+        localStorage.setItem('userId', this.userProfile.id);
+
         console.log(data);
       },
       error => {
         console.log(error);
       }
     );
-    this.openSnackBar('Nie zapomnij uzupełnic swpjego profilu!', 'Uzupełnij');
+    this.openSnackBar('Nie zapomnij uzupełnic swojego profilu!', 'Uzupełnij');
 
   }
   openSnackBar(message: string, action: string) {
@@ -47,7 +45,7 @@ export class UserProfileComponent implements OnInit {
     this.updateOff = false;
   }
   saveUpdate() {
-    this.userService.updateProfile(this.userService.userProfile).subscribe(
+    this.userService.updateProfile(this.userProfile).subscribe(
       data => {
         console.log(data);
       },

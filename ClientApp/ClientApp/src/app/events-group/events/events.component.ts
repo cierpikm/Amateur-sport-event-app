@@ -2,7 +2,7 @@ import { AcceptedAdvertisementComponent } from './../../advertisement-group/acce
 import { Router } from '@angular/router';
 import { EventService } from '../../shared/event.service';
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import { Sports } from '../../data/sports';
+import { Sports } from '../../models/sports';
 import { map } from 'rxjs/operators';
 
 

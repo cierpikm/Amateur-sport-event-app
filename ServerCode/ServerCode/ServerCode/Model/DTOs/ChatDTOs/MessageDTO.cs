@@ -11,7 +11,9 @@ namespace ServerCode.Model.DTOs.ChatDTOs
         public string MessageText { get; set; }
         public DateTime dateSendMessage { get; set; }
         public UserChatDTO Sender { get; set; }
+        public string SenderId { get; set; }
         public UserChatDTO Reciver { get; set; }
+        public string ReciverId { get; set; }
         public int ChatId { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ServerCode.Model
 {
-    public abstract class Advertisement
+    public class Advertisement
     {
         public int Id { get; set; }
         public string Title { get; set; }

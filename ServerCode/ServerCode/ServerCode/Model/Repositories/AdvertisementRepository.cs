@@ -13,14 +13,14 @@ namespace ServerCode.Model.Repositories
     {
         private readonly DatabaseContext _databaseContext;
         private readonly IUserRepository _userRepository;
-        private readonly IBaseRepository<AdvertisementArch> _advertisementArchRepository;
+        private readonly IAdvertisementRepositoryHistory _advertisementRepositoryHistory;
         private readonly IMapper _mapper;
 
-        public AdvertisementRepository(DatabaseContext databaseContext, IUserRepository userRepository, IBaseRepository<AdvertisementArch> advertisementArchRepository, IMapper mapper)
+        public AdvertisementRepository(DatabaseContext databaseContext, IUserRepository userRepository, IAdvertisementRepositoryHistory advertisementRepositoryHistory, IMapper mapper)
         {
             _databaseContext = databaseContext;
             _userRepository = userRepository;
-            _advertisementArchRepository = advertisementArchRepository;
+            _advertisementRepositoryHistory = advertisementRepositoryHistory;
             _mapper = mapper;
         }
 
@@ -29,7 +29,7 @@ namespace ServerCode.Model.Repositories
             advertisement.Date.AddHours(2);
             await _databaseContext.Advertisements.AddAsync(advertisement);
             await _databaseContext.SaveChangesAsync();
-            return advertisement.Id; 
+            return advertisement.Id;
         }
 
         public async Task DeleteAdvertisement(int id)
@@ -45,7 +45,7 @@ namespace ServerCode.Model.Repositories
         }
         public async Task<List<Advertisement>> GetAll()
         {
-            var advertisements =  await _databaseContext.Advertisements
+            var advertisements = await _databaseContext.Advertisements
             .ToListAsync();
             await AddToArchiveAsync(advertisements);
             return advertisements;
@@ -53,46 +53,47 @@ namespace ServerCode.Model.Repositories
 
         public async Task<List<Advertisement>> GetAllAdvertisementsAsync(string city, string id)
         {
+            List<Advertisement> advertisements;
             if (string.IsNullOrEmpty(city))
             {
-                return await _databaseContext.UserAdvertisements
-                .Include(c => c.Advertisement)
-                .Where(c => c.Advertisement.UserId != id)
-                .Where(c => c.UserId != id)
-                .Select(c => c.Advertisement)
+                advertisements = await _databaseContext.Advertisements
                 .Include(c => c.User)
-
+                .Where(c => c.UserId != id)
                 .Include(c => c.Localization)
                 .Include(c => c.EagerMembers)
                     .ThenInclude(c => c.User)
+                .Where(c => !c.EagerMembers.Any(d => d.UserId == id))
                 .ToListAsync();
+               // await AddToArchiveAsync(advertisements);
+                return advertisements;
             }
-            return await _databaseContext.UserAdvertisements
-               .Include(c => c.Advertisement)
-               .Where(c => c.Advertisement.UserId != id)
-               .Where(c => c.UserId != id)
-               .Select(c => c.Advertisement)
+                advertisements = await _databaseContext.Advertisements
                .Include(c => c.User)
-
+               .Where(c => c.UserId != id)
                .Include(c => c.Localization)
                .Where(c => c.Localization.City == city)
                .Include(c => c.EagerMembers)
-                   .ThenInclude(c => c.User)
+                    .ThenInclude(c => c.User)
+               .Where(c => !c.EagerMembers.Any(d => d.UserId == id))
                .ToListAsync();
+           // await AddToArchiveAsync(advertisements);
+            return advertisements;
         }
         public async Task<List<Advertisement>> GetAllOneAdvertisementsAsync(string userId)
         {
-            return await _databaseContext.Advertisements
+            var advertisements = await _databaseContext.Advertisements
                 .Include(c => c.User)
                     .Where(c => c.UserId == userId)
                 .Include(c => c.Localization)
                 .Include(c => c.EagerMembers)
                     .ThenInclude(c => c.User)
                 .ToListAsync();
+        //    await AddToArchiveAsync(advertisements);
+            return advertisements;
         }
         public async Task<List<Advertisement>> GetAllAcceptedAdvertisementsAsync(string userId)
         {
-            return await _databaseContext.UserAdvertisements
+            var advertisements =  await _databaseContext.UserAdvertisements
                 .Include(c => c.Advertisement)
                 .Where(c => c.UserId == userId)
                 .Select(c => c.Advertisement)
@@ -101,6 +102,8 @@ namespace ServerCode.Model.Repositories
                 .Include(c => c.EagerMembers)
                     .ThenInclude(c => c.User)
                 .ToListAsync();
+       //     await AddToArchiveAsync(advertisements);
+            return advertisements;
         }
 
         public async Task<int> UpdateAdvertisement(Advertisement advertisement)
@@ -131,10 +134,9 @@ namespace ServerCode.Model.Repositories
                 int value = DateTime.Compare(item.Date, now);
                 if (value < 0)
                 {
-                    AdvertisementArch advertisementArch = _mapper.Map<AdvertisementArch>(item);
+                    Advertisement advertisementDTO = _mapper.Map<Advertisement>(item);
+                    await _advertisementRepositoryHistory.Add(advertisementDTO);
                     await DeleteAdvertisement(item.Id);
-                    await _advertisementArchRepository.Add(advertisementArch);
-                    
                 }
             }
         }

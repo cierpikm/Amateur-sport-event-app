@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class UserService {
-  userProfile;
   readonly urlPostUser = 'https://localhost:44352/api';
   readonly tokenHeader = new HttpHeaders({ Authorization: 'Bearer ' + localStorage.getItem('token') });
   constructor(private httpClient: HttpClient) { }

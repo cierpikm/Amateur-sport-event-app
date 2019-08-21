@@ -1,101 +1,104 @@
-import { Component, OnInit, Input, NgZone, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  NgZone,
+  ViewChild,
+  ViewChildren,
+  QueryList
+} from '@angular/core';
 import { MessageService } from 'src/app/shared/message.service';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
-import {CdkTextareaAutosize} from '@angular/cdk/text-field';
-import {take} from 'rxjs/operators';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { take } from 'rxjs/operators';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { Chat } from 'src/app/models/Chats/chat';
+import { Message } from 'src/app/models/Chats/message';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
-  constructor(private messageService: MessageService,
-              private _ngZone: NgZone) { }
-  @Input() chat;
+  constructor(
+    private messageService: MessageService,
+    private _ngZone: NgZone
+  ) {}
+  @Input() chat: Chat;
+  @ViewChildren('messages')
+  messages: QueryList<HTMLElement>;
   messageText;
   userId = localStorage.getItem('userId');
   connection: HubConnection;
 
-  @ViewChild(CdkVirtualScrollViewport, {static: false})
+  @ViewChild(CdkVirtualScrollViewport, { static: false })
   public virtualScrollViewport?: CdkVirtualScrollViewport;
-  @ViewChild('autosize', {static: false}) autosize: CdkTextareaAutosize;
+  @ViewChild('autosize', { static: false }) autosize: CdkTextareaAutosize;
 
-
-
-  ngOnInit() {
-    this.connection = new HubConnectionBuilder()
-    .withUrl('https://localhost:44352/chatHub', {accessTokenFactory: () => localStorage.getItem('token')})
-    .build();
-
-    this.connection.on('SendMessage', data => {
-    console.log(data);
-  });
-
-    this.connection
-    .start()
-    .then(() => console.log('Connection started!'))
-    .catch(err => console.log('Error while establishing connection :('));
-
-    this.connection.on('send', (MessageText, SenderId, ReciverId, ChatId, dateSendMessage) => {
-      if (ReciverId === this.userId) {
-        ReciverId = this.chat.owner.id;
-      } else {
-        ReciverId = this.chat.reciver.id;
-      }
-      const message = {
-        messageText: MessageText,
-        sender: {id: this.userId},
-        reciver: {id: ReciverId},
-        chatId: ChatId,
-        DateSendMessage: dateSendMessage
-      };
-      this.chat.messages.push(message);
-      console.log(MessageText, SenderId, ReciverId, ChatId);
-  });
+  ngAfterViewInit() {
+    this.messages.changes.subscribe(() => {
+      console.log('dupa');
+      const length = this.chat.messages.length;
+      this.virtualScrollViewport.scrollToIndex(length * 9, 'smooth');
+    });
   }
 
-   sendMessage() {
+  ngOnInit() {
+    console.log(this.chat);
+
+    this.connection = new HubConnectionBuilder()
+      .withUrl('https://localhost:44352/chatHub', {
+        accessTokenFactory: () => localStorage.getItem('token')
+      })
+      .build();
+
+    this.connection.on('SendMessage', data => {
+      console.log(data);
+    });
+
+    this.connection
+      .start()
+      .then(() => console.log('Connection started!'))
+      .catch(err => console.log('Error while establishing connection :('));
+
+    this.connection.on(
+      'send',
+      (message) => {
+        this.chat.messages.push(message);
+        console.log(message);
+      }
+    );
+  }
+
+  sendMessage() {
     let reciverId;
-    const actualDate =  new Date();
+    const actualDate = new Date();
     if (this.chat.reciver.id === this.userId) {
-       reciverId = this.chat.owner.id;
+      reciverId = this.chat.owner.id;
     } else {
-      reciverId =  this.chat.reciver.id;
+      reciverId = this.chat.reciver.id;
     }
 
-    const message = {
+    const message: Message = {
       messageText: this.messageText,
       dateSendMessage: actualDate,
-      sender: {id: this.userId},
-      reciver: {id: reciverId},
-      chatId: this.chat.id
-    };
-    this.chat.messages.push(message);
-    const length = this.chat.messages.length;
-    const message2 = {
-      messageText: this.messageText,
-      dateSendMessage: actualDate,
+      chatId: this.chat.id,
       senderId: this.userId,
       reciverId,
-      chatId: this.chat.id,
     };
-    this.messageService.sendMessage(message2).subscribe(
+    this.chat.messages.push(message);
+    this.messageService.sendMessage(message).subscribe(
       data => {
         console.log(data);
-
-        this.virtualScrollViewport.scrollToIndex(length, 'smooth');
-
       },
       err => {
         console.log(err);
       }
     );
   }
-
   triggerResize() {
-    // Wait for changes to be applied, then trigger textarea resize.
-    this._ngZone.onStable.pipe(take(1))
-        .subscribe(() => this.autosize.resizeToFitContent(true));
+    this._ngZone.onStable
+      .pipe(take(1))
+      .subscribe(() => this.autosize.resizeToFitContent(true));
   }
 }

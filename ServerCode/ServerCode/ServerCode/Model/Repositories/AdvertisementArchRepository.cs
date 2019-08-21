@@ -4,49 +4,50 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ServerCode.Model.Database;
+using ServerCode.Model.Interfaces;
 
 namespace ServerCode.Model.Repositories
 {
-    public class AdvertisementArchRepository : BaseRepository<AdvertisementArch>
+    public class AdvertisementArchRepository : IAdvertisementRepositoryHistory
     {
-        public AdvertisementArchRepository(DatabaseContext databaseContext) : base(databaseContext)
+        private readonly DatabaseHistoryContext _databaseHistoryContext;
+
+        public AdvertisementArchRepository(DatabaseHistoryContext databaseHistoryContext)
         {
+            this._databaseHistoryContext = databaseHistoryContext;
         }
 
-        public override Task<AdvertisementArch> Get(int id)
-        {
-            throw new NotImplementedException();
-        }
 
-        public override Task<List<AdvertisementArch>> GetAll()
+        public async Task<int> Add(Advertisement advertisement)
         {
-            return null;
-            //return _databaseContext.AdvertisementArches
-            //     .Include(c => c.User)
-            //     .Include(c => c.Localization)
-            //     .Include(c => c.EagerMembers)
-            //     .ToListAsync();
+            await _databaseHistoryContext.AdvertisementsHistory.AddAsync(advertisement);
+            await _databaseHistoryContext.SaveChangesAsync();
+            return advertisement.Id;
         }
-
-        public override Task<List<AdvertisementArch>> GetAll(int pageNumber, int pageSize)
+       
+        public async Task<List<Advertisement>> GetAllOneAdvertisementsAsync(string userId)
         {
-            throw new NotImplementedException();
+            var advertisements = await _databaseHistoryContext.AdvertisementsHistory
+                .Include(c => c.User)
+                    .Where(c => c.UserId == userId)
+                .Include(c => c.Localization)
+                .Include(c => c.EagerMembers)
+                    .ThenInclude(c => c.User)
+                .ToListAsync();
+            return advertisements;
         }
-
-        public override Task<List<AdvertisementArch>> GetAllOneUser(string id)
+        public async Task<List<Advertisement>> GetAllAcceptedAdvertisementsAsync(string userId)
         {
-            return null;
-            //return _databaseContext.AdvertisementArches
-            //    .Where(c => c.UserId == id)
-            //  .Include(c => c.User)
-            //  .Include(c => c.Localization)
-            //  .Include(c => c.EagerMembers)
-            //  .ToListAsync();
-        }
-
-        public override Task<int> UpdateAdvertisement(AdvertisementArch t)
-        {
-            throw new NotImplementedException();
+            var advertisements = await _databaseHistoryContext.UserAdvertisementsHistory
+                .Include(c => c.Advertisement)
+                .Where(c => c.UserId == userId)
+                .Select(c => c.Advertisement)
+                .Include(c => c.User)
+                .Include(c => c.Localization)
+                .Include(c => c.EagerMembers)
+                    .ThenInclude(c => c.User)
+                .ToListAsync();
+            return advertisements;
         }
     }
 }

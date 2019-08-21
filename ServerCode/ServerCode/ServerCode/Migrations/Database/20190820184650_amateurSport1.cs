@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ServerCode.Migrations
+namespace ServerCode.Migrations.Database
 {
-    public partial class amateurSport : Migration
+    public partial class amateurSport1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -344,6 +344,7 @@ namespace ServerCode.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     MessageText = table.Column<string>(nullable: true),
+                    dateSendMessage = table.Column<DateTime>(nullable: false),
                     SenderId = table.Column<string>(nullable: true),
                     ReciverId = table.Column<string>(nullable: true),
                     ChatId = table.Column<int>(nullable: false),

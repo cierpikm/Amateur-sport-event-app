@@ -5,24 +5,6 @@
     <div class="col-sm-4  mx-auto align-items-center">
       <form #form="ngForm">
         <div class="md-form">
-          <label for="oldPassword">Login</label>
-          <input
-            mdbInput
-            mdbValidate
-            type="text"
-            id="login"
-            class="form-control"
-            name="UserName"
-            [(ngModel)]="changePasswordModel.UserName"
-            #username="ngModel"
-            required
-          />
-          <mdb-error
-            *ngIf="username.invalid && (username.dirty || username.touched)"
-            >Login niepoprawny</mdb-error
-          >
-        </div>
-        <div class="md-form">
           <label for="oldPassword">Stare hasło</label>
           <input
             mdbInput

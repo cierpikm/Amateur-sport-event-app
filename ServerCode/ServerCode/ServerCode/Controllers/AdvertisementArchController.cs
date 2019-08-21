@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ServerCode.Model;
+using ServerCode.Model.DTOs;
 using ServerCode.Model.Interfaces;
 
 namespace ServerCode.Controllers
@@ -12,16 +14,28 @@ namespace ServerCode.Controllers
     [ApiController]
     public class AdvertisementArchController : Controller
     {
-        private readonly IBaseRepository<AdvertisementArch> _baseRepository;
+        private readonly IAdvertisementRepositoryHistory _advertisementRepositoryHistory;
+        private readonly IMapper _mapper;
 
-        public AdvertisementArchController(IBaseRepository<AdvertisementArch> baseRepository)
+        public AdvertisementArchController(IAdvertisementRepositoryHistory advertisementRepositoryHistory, IMapper mapper)
         {
-            _baseRepository = baseRepository;
+            _advertisementRepositoryHistory = advertisementRepositoryHistory;
+            _mapper = mapper;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<List<AdvertisementDTO>> GetAllOneAdvertisements(string id)
+        {
+            var result = await _advertisementRepositoryHistory.GetAllOneAdvertisementsAsync(id);
+            List<AdvertisementDTO> advertisementDTOs = _mapper.Map<List<AdvertisementDTO>>(result);
+            return advertisementDTOs;
         }
         [HttpGet("{id}")]
-        public async Task<List<AdvertisementArch>> GetAllAdvertisementArch(string id)
+        public async Task<List<AdvertisementDTO>> GetAllAcceptedAdvertisements(string id)
         {
-            return await _baseRepository.GetAllOneUser(id);
+            var result = await _advertisementRepositoryHistory.GetAllAcceptedAdvertisementsAsync(id);
+            List<AdvertisementDTO> advertisementDTOs = _mapper.Map<List<AdvertisementDTO>>(result);
+            return advertisementDTOs;
         }
     }
 }

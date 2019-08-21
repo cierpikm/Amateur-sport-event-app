@@ -1,0 +1,16 @@
+<div class="container  ">
+    <h3 [hidden]="otherUser" class="text-center">
+      Ogłoszenia archiwalne dodane przez Ciebie
+    </h3>
+    <div class="row py-2 mx-auto justify-content-center">
+      <div
+        class="col-sm-3 border shadow py-2 pb-2 mr-2 mb-2 "
+        *ngFor="let advertisement of advertisements; index as i"
+      >
+        <app-advertisement
+          [advertisement]="advertisement"
+          [ownAdvertisement]="true"
+        ></app-advertisement>
+      </div>
+    </div>
+  </div>
