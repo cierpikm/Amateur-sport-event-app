@@ -9,6 +9,8 @@
           data-toggle="modal"
           data-target="#basicExample"
           (click)="frame.show()"
+          (click)="onClickMe()"
+
           >Zobacz więcej</span
         >
       </p>
@@ -138,11 +140,14 @@
               </div>
             </div>
           </div>
-         <app-forum *ngIf="showForum; else templateName"></app-forum>
-         <ng-template #templateName>
-           <div class="text-center">
-             Forum dostępne tylko dla osób zgłoszonych.
-           </div>
+          <app-forum
+            [advertisementId]="advertisement.id"
+            *ngIf="showForum && showMore; else templateName"
+          ></app-forum>
+          <ng-template #templateName>
+            <div class="text-center">
+              Forum dostępne tylko dla osób zgłoszonych.
+            </div>
           </ng-template>
         </div>
       </div>

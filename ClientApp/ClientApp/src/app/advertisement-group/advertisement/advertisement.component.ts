@@ -16,6 +16,7 @@ export class AdvertisementComponent implements OnInit {
   @Output() valueChange = new EventEmitter<number>();
   @Input() showedItem;
   @Input() showForum = false;
+  showMore = false;
   constructor(
     private advertisementService: AdvertisementService,
     private router: Router
@@ -46,5 +47,8 @@ export class AdvertisementComponent implements OnInit {
   }
   navigateToUser(username) {
     this.router.navigateByUrl('user/users/' + username);
+  }
+  onClickMe() {
+    this.showMore = true;
   }
 }

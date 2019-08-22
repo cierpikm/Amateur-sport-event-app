@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ServerCode.Model.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +21,8 @@ namespace ServerCode.Model.Database
             builder.Entity<UserAdvertisement>().HasOne(ua => ua.User).WithMany(u => u.AdvertisementsAccepted).HasForeignKey(ua => ua.UserId);
             builder.Entity<UserAdvertisement>().HasOne(ua => ua.Advertisement).WithMany(u => u.EagerMembers).HasForeignKey(ua => ua.AdvertisementId);
             builder.Entity<Advertisement>().HasOne(a => a.Localization).WithOne().HasForeignKey<Localization>(a => a.AdvertisementId);
-
-          //  builder.Entity<Advertisement>().Property(a => a.Id).ValueGeneratedNever();
+            builder.Entity<Advertisement>().HasOne(a => a.Forum).WithOne().HasForeignKey<Forum>(a => a.AdvertisementId);
+            //  builder.Entity<Advertisement>().Property(a => a.Id).ValueGeneratedNever();
         }
     }
 }

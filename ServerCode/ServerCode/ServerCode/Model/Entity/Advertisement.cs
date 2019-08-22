@@ -22,7 +22,7 @@ namespace ServerCode.Model
         public string UserId { get; set; }
         public User User { get; set; }
         public ICollection<UserAdvertisement> EagerMembers { get; set; }
-      //  public Forum Forum { get; set; }
+        public Forum Forum { get; set; }
 
     }
     public enum LevelUser

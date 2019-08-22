@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServerCode.Model.Database;
 
 namespace ServerCode.Migrations.Database
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20190822111520_amateursport22")]
+    partial class amateursport22
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -306,25 +308,6 @@ namespace ServerCode.Migrations.Database
                     b.ToTable("Posts");
                 });
 
-            modelBuilder.Entity("ServerCode.Model.Entity.UserForum", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ForumId");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ForumId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserForums");
-                });
-
             modelBuilder.Entity("ServerCode.Model.Localization", b =>
                 {
                     b.Property<int>("Id")
@@ -565,18 +548,6 @@ namespace ServerCode.Migrations.Database
                     b.HasOne("ServerCode.Model.User", "Owner")
                         .WithMany()
                         .HasForeignKey("OwnerId");
-                });
-
-            modelBuilder.Entity("ServerCode.Model.Entity.UserForum", b =>
-                {
-                    b.HasOne("ServerCode.Model.Entity.Forum", "Forum")
-                        .WithMany("Users")
-                        .HasForeignKey("ForumId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ServerCode.Model.User", "User")
-                        .WithMany("UserForums")
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("ServerCode.Model.Localization", b =>

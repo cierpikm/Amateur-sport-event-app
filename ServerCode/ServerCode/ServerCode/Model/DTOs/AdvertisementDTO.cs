@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ServerCode.Model.DTOs.ForumDTOs;
+using ServerCode.Model.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,5 +21,6 @@ namespace ServerCode.Model.DTOs
         public string UserId { get; set; }
         public UserDTO UserDTO { get; set; }
         public ICollection<UserDTO> EagerMembers { get; set; }
+        public ForumDTO Forum { get; set; }
     }
 }

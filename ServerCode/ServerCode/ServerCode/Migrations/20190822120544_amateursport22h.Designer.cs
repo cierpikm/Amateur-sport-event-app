@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServerCode.Model.Database;
 
 namespace ServerCode.Migrations
 {
     [DbContext(typeof(DatabaseHistoryContext))]
-    partial class DatabaseHistoryContextModelSnapshot : ModelSnapshot
+    [Migration("20190822120544_amateursport22h")]
+    partial class amateursport22h
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

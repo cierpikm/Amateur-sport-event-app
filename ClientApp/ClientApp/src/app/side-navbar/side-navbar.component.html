@@ -27,8 +27,10 @@
         <a routerLink="events">Wydarzenia</a>
       </li>
       <li>
-        <a routerLink="message">
-          <span matBadge="2" matBadgeColor="warn" matBadgeSize="small" matBadgeOverlap="false"
+        <a (click)="resetBadge()"  routerLink="message">
+          <span [hidden]="!newMessage" matBadge="2" matBadgeColor="warn" matBadgeSize="small" matBadgeOverlap="false"
+            >Wiadomości</span>
+            <span [hidden]="newMessage"
             >Wiadomości</span
           ></a
         >

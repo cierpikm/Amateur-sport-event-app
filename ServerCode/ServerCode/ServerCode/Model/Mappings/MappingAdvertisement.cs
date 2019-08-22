@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using ServerCode.Model.DTOs;
 using ServerCode.Model.DTOs.ChatDTOs;
+using ServerCode.Model.DTOs.ForumDTOs;
+using ServerCode.Model.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +10,23 @@ using System.Threading.Tasks;
 
 namespace ServerCode.Model.Mappings
 {
-    public class MappingAdvertisement: Profile
+    public class MappingAdvertisement : Profile
     {
         public MappingAdvertisement()
         {
+            CreateMap<User, UserDTOForum>();
+            CreateMap<Post, PostDTO>()
+                .ForMember(c => c.Owner, o => o.MapFrom(d => d.Owner)); 
+            CreateMap<Forum, ForumDTO>()
+                .ForMember(c=> c.Users, o => o.MapFrom(d=>d.Users.Select(e=>e.User)));
+
+
             CreateMap<User, UserDTO>();
             CreateMap<Advertisement, AdvertisementDTO>()
-                .ForMember(c=> c.EagerMembers, o=> o.MapFrom(c=>c.EagerMembers.Select(d=>d.User)))
-                .ForMember(c => c.UserDTO, o => o.MapFrom(d => d.User));
+                .ForMember(c => c.EagerMembers, o => o.MapFrom(c => c.EagerMembers.Select(d => d.User)))
+                .ForMember(c => c.UserDTO, o => o.MapFrom(d => d.User))
+                .ForMember(c => c.Forum, o => o.MapFrom(d => d.Forum));
+
             CreateMap<User, UserProfileDTO>();
             CreateMap<Event, EventDTO>();
             CreateMap<User, UserChatDTO>();
@@ -32,6 +43,8 @@ namespace ServerCode.Model.Mappings
 
                .ForMember(c => c.UserId, o => o.Ignore())
                ;
+
+
         }
     }
 }

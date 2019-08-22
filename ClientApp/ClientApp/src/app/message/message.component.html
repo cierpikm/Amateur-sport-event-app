@@ -68,8 +68,8 @@
                         }}
                       </div>
                       <div class="row mx-auto">
-                        <span
-                          matBadge="2"
+                        <span [hidden]="!(newMessage == item.id)"
+                        matBadge="{{amauntMessage}}"
                           matBadgeColor="warn"
                           matBadgeSize="medium"
                           matBadgeOverlap="false"
@@ -83,7 +83,7 @@
           </div>
         </div>
         <div class="col-sm-8 px-0 ">
-          <app-chat *ngIf="chat; showChat" [chat]="chat"></app-chat>
+          <app-chat *ngIf="chat; showChat"  [chat]="chat"></app-chat>
         </div>
       </div>
     </div>

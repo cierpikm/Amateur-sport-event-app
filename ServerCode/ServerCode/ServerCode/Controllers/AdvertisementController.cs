@@ -63,8 +63,9 @@ namespace ServerCode.Controllers
             }
             try
             {
-                await _advertisementRepository.AddAdvertisement(advertisement);
-                return new JsonResult(advertisement);
+                var result = await _advertisementRepository.AddAdvertisement(advertisement);
+                AdvertisementDTO advertisementDTO = _mapper.Map<AdvertisementDTO>(advertisement);
+                return new JsonResult(advertisementDTO);
             }
             catch (ArgumentNullException)
             {

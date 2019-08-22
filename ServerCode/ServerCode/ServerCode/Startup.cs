@@ -42,6 +42,7 @@ namespace ServerCode
             services.AddScoped<IBaseRepository<Sponsor>, SponsorRepository>();
             services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<IAdvertisementRepositoryHistory, AdvertisementArchRepository>();
+            services.AddScoped<IForumRepository, ForumRepository>();
             services.AddDefaultIdentity<User>().AddEntityFrameworkStores<DatabaseContext>();
 
             services.Configure<IdentityOptions>(options =>

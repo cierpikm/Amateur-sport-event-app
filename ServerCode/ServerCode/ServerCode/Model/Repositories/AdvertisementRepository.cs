@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using ServerCode.Model.Database;
+using ServerCode.Model.Entity;
 using ServerCode.Model.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -15,13 +16,15 @@ namespace ServerCode.Model.Repositories
         private readonly IUserRepository _userRepository;
         private readonly IAdvertisementRepositoryHistory _advertisementRepositoryHistory;
         private readonly IMapper _mapper;
+        private readonly IForumRepository _forumRepository;
 
-        public AdvertisementRepository(DatabaseContext databaseContext, IUserRepository userRepository, IAdvertisementRepositoryHistory advertisementRepositoryHistory, IMapper mapper)
+        public AdvertisementRepository(DatabaseContext databaseContext, IUserRepository userRepository, IAdvertisementRepositoryHistory advertisementRepositoryHistory, IMapper mapper, IForumRepository forumRepository)
         {
             _databaseContext = databaseContext;
             _userRepository = userRepository;
             _advertisementRepositoryHistory = advertisementRepositoryHistory;
             _mapper = mapper;
+            _forumRepository = forumRepository;
         }
 
         public async Task<int> AddAdvertisement(Advertisement advertisement)
@@ -29,6 +32,12 @@ namespace ServerCode.Model.Repositories
             advertisement.Date.AddHours(2);
             await _databaseContext.Advertisements.AddAsync(advertisement);
             await _databaseContext.SaveChangesAsync();
+            Forum forum = new Forum()
+            {
+                AdvertisementId = advertisement.Id    
+            };
+            await _forumRepository.CreateForum(forum);
+            await _forumRepository.AddMemberToForum(advertisement.UserId, forum.Id);
             return advertisement.Id;
         }
 
@@ -124,6 +133,8 @@ namespace ServerCode.Model.Repositories
             };
             await _databaseContext.UserAdvertisements.AddAsync(userAdvertisement);
             await _databaseContext.SaveChangesAsync();
+            Forum forum = await _forumRepository.GetForum(advertisementId);
+            await _forumRepository.AddMemberToForum(userId, forum.Id);
 
         }
         public async Task AddToArchiveAsync(List<Advertisement> advertisements)

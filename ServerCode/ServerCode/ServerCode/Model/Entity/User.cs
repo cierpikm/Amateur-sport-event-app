@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using ServerCode.Model.Entity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -19,6 +20,7 @@ namespace ServerCode.Model
         public ICollection<Achievement> Achievements { get; set; }
         public ICollection<UserAdvertisement> AdvertisementsAccepted { get; set; }
         public ICollection<UserAdvertisement> OwnAdvertisements { get; set; }
+        public ICollection<UserForum> UserForums { get; set; }
 
     }
 

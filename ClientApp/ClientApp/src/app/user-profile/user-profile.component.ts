@@ -26,7 +26,9 @@ export class UserProfileComponent implements OnInit {
         this.userProfile = data;
         localStorage.setItem('city', this.userProfile.city);
         localStorage.setItem('userId', this.userProfile.id);
-
+        localStorage.setItem('firstName', this.userProfile.firstName);
+        localStorage.setItem('lastName', this.userProfile.lastName);
+        localStorage.setItem('userName', this.userProfile.userName);
         console.log(data);
       },
       error => {

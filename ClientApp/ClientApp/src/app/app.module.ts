@@ -48,6 +48,7 @@ import { ChatComponent } from './message/chat/chat.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { AdvertisementHistoryComponent } from './advertisement-group/advertisement-history/advertisement-history.component';
 import { ForumComponent } from './forum/forum.component';
+import { ForumService } from './shared/forum.service';
 
 registerLocaleData(localePl, 'pl');
 
@@ -110,6 +111,7 @@ registerLocaleData(localePl, 'pl');
     AdvertisementHistoryService,
     EventService,
     MessageService,
+    ForumService,
     {provide: LOCALE_ID, useValue: 'pl-PL'}
   ],
   bootstrap: [AppComponent]

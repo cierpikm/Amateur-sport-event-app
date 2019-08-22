@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServerCode.Model.Database;
 
 namespace ServerCode.Migrations.Database
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20190822142810_amateursport22_1")]
+    partial class amateursport22_1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -322,7 +324,7 @@ namespace ServerCode.Migrations.Database
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserForums");
+                    b.ToTable("UserForum");
                 });
 
             modelBuilder.Entity("ServerCode.Model.Localization", b =>
