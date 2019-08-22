@@ -15,7 +15,7 @@ export class AdvertisementComponent implements OnInit {
   @Input() ownAdvertisement = false;
   @Output() valueChange = new EventEmitter<number>();
   @Input() showedItem;
-
+  @Input() showForum = false;
   constructor(
     private advertisementService: AdvertisementService,
     private router: Router

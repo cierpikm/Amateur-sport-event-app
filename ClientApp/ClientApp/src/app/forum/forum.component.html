@@ -1,0 +1,49 @@
+<div *ngFor="let item of [1, 2, 3, 4, 5]" class="row border-bottom py-2">
+  <div class="col-sm-3 px-0 text-center">
+    <p>Imie Nazwisko</p>
+    <img
+      src="https://mdbootstrap.com/img/Photos/Avatars/img(31).jpg"
+      class="mx-auto w-75 img-fluid z-depth-1 rounded-circle clickable"
+      alt="Responsive image"
+    />
+  </div>
+  <div class="col-sm-9 px-1">
+    <i>Wysłano: 12.12.2009 </i>
+    <div class="pt-4">
+      tekst wiadomosci tekst wiadomoscitekst wiadomoscitekst wiadomosci tekst
+      wiadomosci tekst wiadomoscitekst wiadomoscitekst wiadomosci tekst
+      wiadomosci tekst wiadomoscitekst wiadomoscitekst wiadomosci tekst
+      wiadomosci tekst wiadomoscitekst wiadomoscitekst wiadomosci
+    </div>
+    <div class="row py-1 px-2">
+      <a class="px-2">
+        <i class="fas fa-users "></i>
+        <span>Profil</span>
+      </a>
+      <a class="px-2">
+        <i class="far fa-envelope "></i>
+        <span>
+          Prywatna wiadomość
+        </span>
+      </a>
+    </div>
+  </div>
+</div>
+<div class="row py-1">
+  <div class="col-sm-10 px-1">
+    <input
+      type="text"
+      id="meessage"
+      class="form-control"
+      placeholder="Napisz post"
+      #sendInput
+      (keyup.enter)="sendInput.value = ''"
+    />
+  </div>
+  <div class="col-sm-2 text-center my-auto">
+    <a
+      (click)="sendInput.value = ''"
+      class="fas fa-2x fa-angle-double-right"
+    ></a>
+  </div>
+</div>

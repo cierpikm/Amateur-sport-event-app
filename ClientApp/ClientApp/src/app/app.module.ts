@@ -47,6 +47,7 @@ import localePl from '@angular/common/locales/pl';
 import { ChatComponent } from './message/chat/chat.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { AdvertisementHistoryComponent } from './advertisement-group/advertisement-history/advertisement-history.component';
+import { ForumComponent } from './forum/forum.component';
 
 registerLocaleData(localePl, 'pl');
 
@@ -82,7 +83,8 @@ registerLocaleData(localePl, 'pl');
     UsersDataComponent,
     AddEventsComponent,
     ChatComponent,
-    AdvertisementHistoryComponent
+    AdvertisementHistoryComponent,
+    ForumComponent
   ],
   imports: [
     MatBadgeModule,

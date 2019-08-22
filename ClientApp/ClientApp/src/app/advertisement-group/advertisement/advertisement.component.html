@@ -1,4 +1,3 @@
-
 <div class="display-detail">
   <div class="card">
     <img class="card-img pt-3" src="assets/1.jpg" class="rounded img-fluid " />
@@ -23,7 +22,7 @@
   {{ advertisement.localization.streetNumber }},
   {{ advertisement.localization.city }}
 </p>
-<p><i class="far fa-clock fa-1x"></i> {{ advertisement.date | date}}</p>
+<p><i class="far fa-clock fa-1x"></i> {{ advertisement.date | date }}</p>
 <p type="date">
   <i class="fas fa-futbol fa-1x"></i>
   {{ toSportsEnum(advertisement.sportType) }}
@@ -95,14 +94,15 @@
           <p class="text-center">{{ advertisement.ageRange }}</p>
           <hr />
           <p>Dokładna data</p>
-          <p class="text-center">{{ advertisement.date | date:'medium' }}</p>
+          <p class="text-center">{{ advertisement.date | date: "medium" }}</p>
           <hr />
           <p>Osoba dodająca</p>
           <div class="text-center">
             <p>
               {{ advertisement.userDTO.userName }}
             </p>
-            <img  (click)="navigateToUser(advertisement.userDTO.userName)"
+            <img
+              (click)="navigateToUser(advertisement.userDTO.userName)"
               src="https://mdbootstrap.com/img/Photos/Avatars/img(31).jpg"
               class="mx-auto w-40 img-fluid z-depth-1 rounded-circle clickable"
               alt="Responsive image"
@@ -115,7 +115,8 @@
               class="col-md-4"
               *ngFor="let eager of advertisement.eagerMembers"
             >
-              <img (click)="navigateToUser(eager.userName)"
+              <img
+                (click)="navigateToUser(eager.userName)"
                 src="https://mdbootstrap.com/img/Photos/Avatars/img(31).jpg"
                 class="mx-auto w-75 img-fluid z-depth-1 rounded-circle clickable"
                 alt="Responsive image"
@@ -123,9 +124,29 @@
               <p>{{ eager.userName }}</p>
             </div>
           </div>
+          <hr />
+          <p>Forum</p>
+          <div class="row">
+            <div class="col-sm-3 px-0">
+              <div class="mb-2 bg-info text-center rounded text-white">
+                Autor
+              </div>
+            </div>
+            <div class="col-sm-9 px-1">
+              <div class="mb-2 bg-info text-center rounded text-white">
+                Wiadomość
+              </div>
+            </div>
+          </div>
+         <app-forum *ngIf="showForum; else templateName"></app-forum>
+         <ng-template #templateName>
+           <div class="text-center">
+             Forum dostępne tylko dla osób zgłoszonych.
+           </div>
+          </ng-template>
         </div>
       </div>
+      <!--/.Content-->
     </div>
-    <!--/.Content-->
   </div>
 </div>
