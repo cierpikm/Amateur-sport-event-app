@@ -31,4 +31,5 @@ export class UserService {
   changePassword(changePassword) {
     return this.httpClient.post(this.urlPostUser + '/User/ChangePassword', changePassword, {headers: this.tokenHeader});
   }
+
 }

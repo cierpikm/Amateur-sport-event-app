@@ -12,7 +12,7 @@ import { Sports } from '../models/sports';
 export class UserProfileComponent implements OnInit {
   sports: Sports;
   selectedSport;
-
+  public response: {dbPath: ''};
   updateOff = true;
   constructor(
     private userService: UserService,
@@ -29,6 +29,13 @@ export class UserProfileComponent implements OnInit {
         localStorage.setItem('firstName', this.userProfile.firstName);
         localStorage.setItem('lastName', this.userProfile.lastName);
         localStorage.setItem('userName', this.userProfile.userName);
+        localStorage.setItem('imageURL', this.userProfile.imageURL);
+
+
+        if (this.userProfile.imageURL === null) {
+          this.userProfile.imageURL = `Resources/Images/default.png`;
+          this.saveUpdate();
+        }
         console.log(data);
       },
       error => {
@@ -36,6 +43,8 @@ export class UserProfileComponent implements OnInit {
       }
     );
     this.openSnackBar('Nie zapomnij uzupełnic swojego profilu!', 'Uzupełnij');
+
+
 
   }
   openSnackBar(message: string, action: string) {
@@ -47,6 +56,7 @@ export class UserProfileComponent implements OnInit {
     this.updateOff = false;
   }
   saveUpdate() {
+    this.userProfile.imageURL = this.response.dbPath;
     this.userService.updateProfile(this.userProfile).subscribe(
       data => {
         console.log(data);
@@ -92,5 +102,14 @@ export class UserProfileComponent implements OnInit {
   }
   onNavigateToUserProfile(userName) {
     this.router.navigateByUrl('user/users/' + userName);
+  }
+
+public uploadFinished = (event) => {
+    this.response = event;
+
+
+  }
+  public createImgPath = (serverPath: string) => {
+    return `https://localhost:44352/${serverPath}`;
   }
 }

@@ -4,7 +4,7 @@
       <div class="col-sm-3 px-0 text-center">
         <p>{{item.owner.firstName}} {{item.owner.lastName}}</p>
         <img
-          src="https://mdbootstrap.com/img/Photos/Avatars/img(31).jpg"
+        [src]="createImgPath(item.owner.imageURL)"
           class="mx-auto w-75 img-fluid z-depth-1 rounded-circle clickable"
           alt="Responsive image"
         />

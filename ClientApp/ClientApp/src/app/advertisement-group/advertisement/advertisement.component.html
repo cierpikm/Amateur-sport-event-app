@@ -105,8 +105,8 @@
             </p>
             <img
               (click)="navigateToUser(advertisement.userDTO.userName)"
-              src="https://mdbootstrap.com/img/Photos/Avatars/img(31).jpg"
-              class="mx-auto w-40 img-fluid z-depth-1 rounded-circle clickable"
+              [src]="createImgPath(advertisement.userDTO.imageURL)"
+              class="mx-auto w-50 img-fluid z-depth-1 rounded-circle clickable"
               alt="Responsive image"
             />
           </div>
@@ -119,7 +119,7 @@
             >
               <img
                 (click)="navigateToUser(eager.userName)"
-                src="https://mdbootstrap.com/img/Photos/Avatars/img(31).jpg"
+                [src]="createImgPath(eager.imageURL)"
                 class="mx-auto w-75 img-fluid z-depth-1 rounded-circle clickable"
                 alt="Responsive image"
               />

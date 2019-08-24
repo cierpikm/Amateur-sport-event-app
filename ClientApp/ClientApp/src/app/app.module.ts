@@ -49,6 +49,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { AdvertisementHistoryComponent } from './advertisement-group/advertisement-history/advertisement-history.component';
 import { ForumComponent } from './forum/forum.component';
 import { ForumService } from './shared/forum.service';
+import { UploadPictureComponent } from './upload-picture/upload-picture.component';
 
 registerLocaleData(localePl, 'pl');
 
@@ -85,7 +86,8 @@ registerLocaleData(localePl, 'pl');
     AddEventsComponent,
     ChatComponent,
     AdvertisementHistoryComponent,
-    ForumComponent
+    ForumComponent,
+    UploadPictureComponent
   ],
   imports: [
     MatBadgeModule,

@@ -51,4 +51,7 @@ export class AdvertisementComponent implements OnInit {
   onClickMe() {
     this.showMore = true;
   }
+  public createImgPath = (serverPath: string) => {
+    return `https://localhost:44352/${serverPath}`;
+  }
 }

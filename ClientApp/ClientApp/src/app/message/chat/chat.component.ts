@@ -86,7 +86,15 @@ export class ChatComponent implements OnInit {
       senderId: this.userId,
       reciverId,
     };
-    this.chat.messages.push(message);
+    const message2: Message = {
+      messageText: this.messageText,
+      dateSendMessage: actualDate,
+      chatId: this.chat.id,
+      senderId: this.userId,
+      reciverId,
+      sender: {imageURL: localStorage.getItem('imageURL')}
+    };
+    this.chat.messages.push(message2);
     this.messageService.sendMessage(message).subscribe(
       data => {
         console.log(data);
@@ -100,5 +108,8 @@ export class ChatComponent implements OnInit {
     this._ngZone.onStable
       .pipe(take(1))
       .subscribe(() => this.autosize.resizeToFitContent(true));
+  }
+  public createImgPath = (serverPath: string) => {
+    return `https://localhost:44352/${serverPath}`;
   }
 }

@@ -18,12 +18,14 @@ namespace ServerCode.Controllers
     {
         private IHubContext<ChatHub> _messageHub;
         private IMessageRepository _messageRepository;
+        private IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
-        public MessageController(IHubContext<ChatHub> messageHub, IMessageRepository messageRepository, IMapper mapper)
+        public MessageController(IHubContext<ChatHub> messageHub, IMessageRepository messageRepository, IUserRepository userRepository, IMapper mapper)
         {
             _messageHub = messageHub;
             _messageRepository = messageRepository;
+            _userRepository = userRepository;
             _mapper = mapper;
         }
 
@@ -31,6 +33,8 @@ namespace ServerCode.Controllers
         public async Task<IActionResult> SendMessage(Message message)
         {
             await _messageRepository.AddMessage(message);
+            message.Reciver = await _userRepository.GetUser(message.ReciverId);
+            message.Sender = await _userRepository.GetUser(message.SenderId);
             await _messageHub.Clients
                .User(message.ReciverId)
                .SendAsync("send", message);

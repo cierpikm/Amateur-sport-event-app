@@ -80,4 +80,7 @@ export class MessageComponent implements OnInit {
    }
       return true;
  }
+ public createImgPath = (serverPath: string) => {
+  return `https://localhost:44352/${serverPath}`;
+}
 }

@@ -23,9 +23,16 @@
                     *ngFor="let item of chats"
                     (click)="getChat(item.id)"
                   >
-                    <div class="col-sm-3">
+                    <div class="col-sm-3" *ngIf="checkOwner(item.owner.id)">
                       <img
-                        src="https://mdbootstrap.com/img/Photos/Avatars/img(31).jpg"
+                        *ngIf="owner"
+                        [src]="createImgPath(item.reciver.imageURL)"
+                        class="mx-auto w-30 img-fluid z-depth-1 rounded-circle clickable"
+                        alt="Responsive image"
+                      />
+                      <img
+                        *ngIf="!owner"
+                        [src]="createImgPath(item.owner.imageURL)"
                         class="mx-auto w-30 img-fluid z-depth-1 rounded-circle clickable"
                         alt="Responsive image"
                       />
@@ -68,8 +75,9 @@
                         }}
                       </div>
                       <div class="row mx-auto">
-                        <span [hidden]="!(newMessage == item.id)"
-                        matBadge="{{amauntMessage}}"
+                        <span
+                          [hidden]="!(newMessage == item.id)"
+                          matBadge="{{ amauntMessage }}"
                           matBadgeColor="warn"
                           matBadgeSize="medium"
                           matBadgeOverlap="false"
@@ -83,7 +91,7 @@
           </div>
         </div>
         <div class="col-sm-8 px-0 ">
-          <app-chat *ngIf="chat; showChat"  [chat]="chat"></app-chat>
+          <app-chat *ngIf="chat; showChat" [chat]="chat"></app-chat>
         </div>
       </div>
     </div>

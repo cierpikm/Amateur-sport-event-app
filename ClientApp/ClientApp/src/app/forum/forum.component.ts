@@ -79,6 +79,8 @@ export class ForumComponent implements OnInit {
         firstName: localStorage.getItem('firstName'),
         lastName: localStorage.getItem('lastName'),
         userName: localStorage.getItem('userName'),
+        imageURL: localStorage.getItem('imageURL'),
+
       },
       forumId: this.forum.id,
       reciver
@@ -110,5 +112,8 @@ export class ForumComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+  public createImgPath = (serverPath: string) => {
+    return `https://localhost:44352/${serverPath}`;
   }
 }

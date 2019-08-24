@@ -75,4 +75,7 @@ export class UsersComponent implements OnInit {
       }
     );
   }
+  public createImgPath = (serverPath: string) => {
+    return `https://localhost:44352/${serverPath}`;
+  }
 }
