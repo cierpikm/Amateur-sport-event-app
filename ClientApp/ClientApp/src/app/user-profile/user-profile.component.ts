@@ -56,7 +56,7 @@ export class UserProfileComponent implements OnInit {
     this.updateOff = false;
   }
   saveUpdate() {
-    this.userProfile.imageURL = this.response.dbPath;
+
     this.userService.updateProfile(this.userProfile).subscribe(
       data => {
         console.log(data);
@@ -76,13 +76,13 @@ export class UserProfileComponent implements OnInit {
   }
   addPrefferSport() {
     const body = {
-      Vaule: this.selectedSport,
-      UserId: localStorage.getItem('userId')
+      vaule: this.selectedSport,
+      userId: localStorage.getItem('userId')
     };
     this.userService.addPrefferSport(body).subscribe(
       data => {
         console.log(data);
-        this.ngOnInit();
+        this.userProfile.prefferedSports.push(data);
       },
       error => {
         console.log(error);
@@ -106,7 +106,7 @@ export class UserProfileComponent implements OnInit {
 
 public uploadFinished = (event) => {
     this.response = event;
-
+    this.userProfile.imageURL = this.response.dbPath;
 
   }
   public createImgPath = (serverPath: string) => {

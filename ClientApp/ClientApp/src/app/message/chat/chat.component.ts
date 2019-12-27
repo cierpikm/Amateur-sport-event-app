@@ -37,7 +37,6 @@ export class ChatComponent implements OnInit {
 
   ngAfterViewInit() {
     this.messages.changes.subscribe(() => {
-      console.log('dupa');
       const length = this.chat.messages.length;
       this.virtualScrollViewport.scrollToIndex(length * 9, 'smooth');
     });
