@@ -33,7 +33,7 @@ namespace ServerCode
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             var dbConnectionString = @"Server=(localdb)\mssqllocaldb;Database=AmateurSportsEvents;Trusted_Connection=True";
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(dbConnectionString));
             services.AddDbContext<DatabaseHistoryContext>(options => options.UseSqlServer(dbConnectionString));

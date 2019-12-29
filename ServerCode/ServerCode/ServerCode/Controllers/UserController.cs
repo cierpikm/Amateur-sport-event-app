@@ -119,7 +119,7 @@ namespace ServerCode.Controllers
             }
             catch (Exception exception)
             {
-                return Unauthorized(exception.Message);
+                return null; // Unauthorized(exception.Message);
             }
 
 
