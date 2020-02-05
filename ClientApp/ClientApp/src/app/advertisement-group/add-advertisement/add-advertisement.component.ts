@@ -31,20 +31,16 @@ export class AddAdvertisementComponent implements OnInit {
   constructor(
     private router: Router,
     private advertisementService: AdvertisementService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
   navigate() {
     this.router.navigateByUrl('user/ownAdvertisement');
   }
   saveAdvertisement() {
     this.advertisementService.addAdvertisement(this.advertisement).subscribe(
-      data => {
-        console.log(data);
+      () => {
         this.navigate();
-      },
-      error => {
-        console.log(error);
       }
     );
   }

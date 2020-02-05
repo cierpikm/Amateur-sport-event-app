@@ -21,9 +21,9 @@ export class RegisterComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     public dialogRef: MatDialogRef<RegisterComponent>
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
   signIn() {
     this.userService.postUser(this.userAuth).subscribe(
       (res: any) => {
@@ -32,11 +32,9 @@ export class RegisterComponent implements OnInit {
             this.onHttpError(element.description);
           });
         } else {
-          console.log('POST Request is successful ', res);
           this.postError = false;
           this.dialogRef.close();
           this.userService.login(this.userAuth).subscribe((data: any) => {
-            console.log('POST Request is successful', data);
             localStorage.setItem('token', data.token);
             this.router.navigateByUrl('/user/profile');
           });
@@ -48,7 +46,6 @@ export class RegisterComponent implements OnInit {
     );
   }
   onHttpError(error: any) {
-    console.log('error', error);
     this.postError = true;
     this.postErrorMessage = error;
   }

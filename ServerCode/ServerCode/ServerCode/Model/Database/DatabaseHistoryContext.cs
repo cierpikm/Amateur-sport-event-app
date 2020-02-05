@@ -22,7 +22,6 @@ namespace ServerCode.Model.Database
             builder.Entity<UserAdvertisement>().HasOne(ua => ua.Advertisement).WithMany(u => u.EagerMembers).HasForeignKey(ua => ua.AdvertisementId);
             builder.Entity<Advertisement>().HasOne(a => a.Localization).WithOne().HasForeignKey<Localization>(a => a.AdvertisementId);
             builder.Entity<Advertisement>().HasOne(a => a.Forum).WithOne().HasForeignKey<Forum>(a => a.AdvertisementId);
-            //  builder.Entity<Advertisement>().Property(a => a.Id).ValueGeneratedNever();
         }
     }
 }

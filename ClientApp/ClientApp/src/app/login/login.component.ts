@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     public dialogRef: MatDialogRef<LoginComponent>
-  ) {}
+  ) { }
   userLogin: UserLogin = {
     Username: '',
     Password: ''
@@ -23,12 +23,11 @@ export class LoginComponent implements OnInit {
   loginError = false;
   postErrorMessag = '';
 
-  ngOnInit() {}
+  ngOnInit() { }
   onSubmit() {
-    this.loginError =  false;
+    this.loginError = false;
     this.userService.login(this.userLogin).subscribe(
       (res: any) => {
-        console.log('POST Request is successful', res);
         localStorage.setItem('token', res.token);
         this.getUser();
         this.router.navigateByUrl('/user/profile');
@@ -36,7 +35,6 @@ export class LoginComponent implements OnInit {
       },
       error => {
         if (error.status === 400) {
-          console.log(error);
           this.loginError = true;
           this.postErrorMessag = error.error.message;
         }
@@ -47,10 +45,6 @@ export class LoginComponent implements OnInit {
     this.userService.getUserProfile().subscribe(
       (data: any) => {
         localStorage.setItem('userId', data.id);
-        console.log(data);
-      },
-      error => {
-        console.log(error);
       }
     );
   }

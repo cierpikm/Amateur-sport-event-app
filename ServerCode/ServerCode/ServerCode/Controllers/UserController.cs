@@ -38,6 +38,7 @@ namespace ServerCode.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GerUser(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
@@ -119,19 +120,19 @@ namespace ServerCode.Controllers
             }
             catch (Exception exception)
             {
-                return null; // Unauthorized(exception.Message);
+                return BadRequest(exception.Message);
             }
 
 
         }
         [HttpGet]
         [Authorize]
-        public async Task<Object> GetUserProfile()
+        public async Task<IActionResult> GetUserProfile()
         {
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var result = await _userRepository.GetUser(userId);
-            UserProfileDTO userProfileDTO = _mapper.Map<UserProfileDTO>(result);
-            return userProfileDTO;    
+            var userProfileDTO = _mapper.Map<UserProfileDTO>(result);
+            return Ok(userProfileDTO);
         }
         [HttpGet("{userName}")]
         [Authorize]
@@ -139,7 +140,7 @@ namespace ServerCode.Controllers
         {
             var user = await _userManager.FindByNameAsync(userName);
             var result = await _userRepository.GetUser(user.Id);
-            UserProfileDTO userProfileDTO = _mapper.Map<UserProfileDTO>(result);
+            var userProfileDTO = _mapper.Map<UserProfileDTO>(result);
             return userProfileDTO;
         }
 

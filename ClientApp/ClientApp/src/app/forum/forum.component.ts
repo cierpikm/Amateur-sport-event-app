@@ -25,7 +25,7 @@ export class ForumComponent implements OnInit {
     private forumService: ForumService,
     private router: Router,
     private messageService: MessageService
-  ) {}
+  ) { }
   @Input() advertisementId: number;
   PostText;
   forum: Forum;
@@ -48,7 +48,6 @@ export class ForumComponent implements OnInit {
       .build();
 
     this.connection.on('SendPostToForum', data => {
-      console.log(data);
     });
 
     this.connection

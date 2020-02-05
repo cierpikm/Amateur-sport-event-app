@@ -23,7 +23,7 @@ export class ChatComponent implements OnInit {
   constructor(
     private messageService: MessageService,
     private _ngZone: NgZone
-  ) {}
+  ) { }
   @Input() chat: Chat;
   @ViewChildren('messages')
   messages: QueryList<HTMLElement>;
@@ -64,7 +64,6 @@ export class ChatComponent implements OnInit {
       'send',
       (message) => {
         this.chat.messages.push(message);
-        console.log(message);
       }
     );
   }
@@ -91,7 +90,7 @@ export class ChatComponent implements OnInit {
       chatId: this.chat.id,
       senderId: this.userId,
       reciverId,
-      sender: {imageURL: localStorage.getItem('imageURL')}
+      sender: { imageURL: localStorage.getItem('imageURL') }
     };
     this.chat.messages.push(message2);
     this.messageService.sendMessage(message).subscribe(

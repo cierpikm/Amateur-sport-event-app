@@ -1,4 +1,3 @@
-import { AcceptedAdvertisementComponent } from './../../advertisement-group/accepted-advertisement/accepted-advertisement.component';
 import { Router } from '@angular/router';
 import { EventService } from '../../shared/event.service';
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
@@ -14,7 +13,7 @@ import { map } from 'rxjs/operators';
 export class EventsComponent implements OnInit {
   events = [];
 
-  constructor( private eventService: EventService, private router: Router) {}
+  constructor(private eventService: EventService, private router: Router) { }
   isClicked = [];
   clickedItem = 1;
   number = [1, 2, 3];
@@ -30,41 +29,37 @@ export class EventsComponent implements OnInit {
   }
   nextPage() {
     for (let i = 0; i < this.number.length; i++) {
-      this.number[i] ++;
+      this.number[i]++;
     }
-    this.clickedItem ++;
+    this.clickedItem++;
     this.events = [];
     this.getAllEvents(this.clickedItem);
 
   }
   previousPage() {
     for (let i = 0; i < this.number.length; i++) {
-      this.number[i] --;
+      this.number[i]--;
     }
-    this.clickedItem --;
+    this.clickedItem--;
     this.events = [];
     this.getAllEvents(this.clickedItem);
   }
   getAllEvents(pageNumber) {
     this.events = [];
     this.eventService
-    .getAllEvents(pageNumber)
-    .pipe(
-      map((events: []) => {
-        return events;
-      })
-    )
-    .subscribe(
-      events => {
-        for (const i of events) {
-          this.events.push(i);
+      .getAllEvents(pageNumber)
+      .pipe(
+        map((events: []) => {
+          return events;
+        })
+      )
+      .subscribe(
+        events => {
+          for (const i of events) {
+            this.events.push(i);
+          }
         }
-        console.log(events);
-      },
-      error => {
-        console.log(error);
-      }
-    );
+      );
   }
 
 }

@@ -34,7 +34,7 @@ namespace ServerCode.Model.Repositories
             await _databaseContext.SaveChangesAsync();
             Forum forum = new Forum()
             {
-                AdvertisementId = advertisement.Id    
+                AdvertisementId = advertisement.Id
             };
             await _forumRepository.CreateForum(forum);
             await _forumRepository.AddMemberToForum(advertisement.UserId, forum.Id);
@@ -62,30 +62,15 @@ namespace ServerCode.Model.Repositories
 
         public async Task<List<Advertisement>> GetAllAdvertisementsAsync(string city, string id)
         {
-            List<Advertisement> advertisements;
-            if (string.IsNullOrEmpty(city))
-            {
-                advertisements = await _databaseContext.Advertisements
-                .Include(c => c.User)
-                .Where(c => c.UserId != id)
-                .Include(c => c.Localization)
-                .Include(c => c.EagerMembers)
-                    .ThenInclude(c => c.User)
-                .Where(c => !c.EagerMembers.Any(d => d.UserId == id))
-                .ToListAsync();
-               // await AddToArchiveAsync(advertisements);
-                return advertisements;
-            }
-                advertisements = await _databaseContext.Advertisements
-               .Include(c => c.User)
-               .Where(c => c.UserId != id)
-               .Include(c => c.Localization)
-               .Where(c => c.Localization.City == city)
-               .Include(c => c.EagerMembers)
-                    .ThenInclude(c => c.User)
-               .Where(c => !c.EagerMembers.Any(d => d.UserId == id))
-               .ToListAsync();
-           // await AddToArchiveAsync(advertisements);
+            List<Advertisement> advertisements = await _databaseContext.Advertisements
+           .Include(c => c.User)
+           .Where(c => c.UserId != id)
+           .Include(c => c.Localization)
+           .Where(c => string.IsNullOrEmpty(city) || c.Localization.City == city)
+           .Include(c => c.EagerMembers)
+                .ThenInclude(c => c.User)
+           .Where(c => !c.EagerMembers.Any(d => d.UserId == id))
+           .ToListAsync();
             return advertisements;
         }
         public async Task<List<Advertisement>> GetAllOneAdvertisementsAsync(string userId)
@@ -97,12 +82,11 @@ namespace ServerCode.Model.Repositories
                 .Include(c => c.EagerMembers)
                     .ThenInclude(c => c.User)
                 .ToListAsync();
-        //    await AddToArchiveAsync(advertisements);
             return advertisements;
         }
         public async Task<List<Advertisement>> GetAllAcceptedAdvertisementsAsync(string userId)
         {
-            var advertisements =  await _databaseContext.UserAdvertisements
+            var advertisements = await _databaseContext.UserAdvertisements
                 .Include(c => c.Advertisement)
                 .Where(c => c.UserId == userId)
                 .Select(c => c.Advertisement)
@@ -111,7 +95,6 @@ namespace ServerCode.Model.Repositories
                 .Include(c => c.EagerMembers)
                     .ThenInclude(c => c.User)
                 .ToListAsync();
-       //     await AddToArchiveAsync(advertisements);
             return advertisements;
         }
 

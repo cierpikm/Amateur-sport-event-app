@@ -1,7 +1,7 @@
 import { UserService } from './../shared/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Sports } from '../models/sports';
 
 @Component({
@@ -12,13 +12,13 @@ import { Sports } from '../models/sports';
 export class UserProfileComponent implements OnInit {
   sports: Sports;
   selectedSport;
-  public response: {dbPath: ''};
+  public response: { dbPath: '' };
   updateOff = true;
   constructor(
     private userService: UserService,
     private router: Router,
     private _snackBar: MatSnackBar
-  ) {}
+  ) { }
   userProfile;
   ngOnInit() {
     this.userService.getUserProfile().subscribe(
@@ -36,10 +36,6 @@ export class UserProfileComponent implements OnInit {
           this.userProfile.imageURL = `Resources/Images/default.png`;
           this.saveUpdate();
         }
-        console.log(data);
-      },
-      error => {
-        console.log(error);
       }
     );
     this.openSnackBar('Nie zapomnij uzupełnic swojego profilu!', 'Uzupełnij');
@@ -104,7 +100,7 @@ export class UserProfileComponent implements OnInit {
     this.router.navigateByUrl('user/users/' + userName);
   }
 
-public uploadFinished = (event) => {
+  public uploadFinished = (event) => {
     this.response = event;
     this.userProfile.imageURL = this.response.dbPath;
 

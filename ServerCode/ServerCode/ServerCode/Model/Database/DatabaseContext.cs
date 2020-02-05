@@ -1,14 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ServerCode.Model.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ServerCode.Model.Database
 {
-    public class DatabaseContext: IdentityDbContext
+    public class DatabaseContext : IdentityDbContext
     {
         public DbSet<Achievement> Achievements { get; set; }
         public DbSet<SportName> SportNames { get; set; }
@@ -24,12 +20,9 @@ namespace ServerCode.Model.Database
         public DbSet<Forum> Forums { get; set; }
         public DbSet<Post> Posts { get; set; }
 
-
-   
-
-        public DatabaseContext(DbContextOptions<DatabaseContext> options) :base(options)
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
-            
+
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -47,7 +40,6 @@ namespace ServerCode.Model.Database
             builder.Entity<Advertisement>().HasOne(a => a.Forum).WithOne().HasForeignKey<Forum>(a => a.AdvertisementId);
             builder.Entity<UserForum>().HasOne(uf => uf.User).WithMany(u => u.UserForums).HasForeignKey(ua => ua.UserId);
             builder.Entity<UserForum>().HasOne(uf => uf.Forum).WithMany(u => u.Users).HasForeignKey(ua => ua.ForumId);
-
         }
     }
 }

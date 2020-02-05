@@ -20,9 +20,9 @@ export class AdvertisementComponent implements OnInit {
   constructor(
     private advertisementService: AdvertisementService,
     private router: Router
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
   toSportsEnum(sports: Sports) {
     return Sports[sports];
   }
@@ -32,15 +32,7 @@ export class AdvertisementComponent implements OnInit {
   acceptedAdvertisement(advrtisementId) {
     this.valueChange.emit(this.showedItem + 1);
     this.advertisementService
-      .addMemberToAdvertisement(advrtisementId)
-      .subscribe(
-        data => {
-          console.log(data);
-        },
-        error => {
-          console.log(error);
-        }
-      );
+      .addMemberToAdvertisement(advrtisementId);
   }
   discardAdveritesement() {
     this.valueChange.emit(this.showedItem + 1);

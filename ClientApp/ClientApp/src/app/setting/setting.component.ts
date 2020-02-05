@@ -32,15 +32,10 @@ export class SettingComponent implements OnInit {
           this.postError = false;
           this.success = true;
         }
-        console.log(data);
-      },
-      err => {
-        console.log(err);
       }
     );
   }
   onHttpError(error: any) {
-    console.log('error', error);
     this.postError = true;
     this.postErrorMessage = error;
   }

@@ -23,10 +23,6 @@ export class OwnAdvertisementComponent implements OnInit {
         for (const i of advertisements) {
           this.advertisements.push(i);
         }
-        console.log(advertisements);
-      },
-      error => {
-        console.log(error);
       }
     );
   }

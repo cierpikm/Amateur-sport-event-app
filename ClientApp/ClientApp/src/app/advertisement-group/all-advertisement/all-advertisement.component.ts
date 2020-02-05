@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 export class AllAdvertisementComponent implements OnInit {
   showedItem = 0;
   advertisements = [];
-  constructor(private advertisementService: AdvertisementService) {}
+  constructor(private advertisementService: AdvertisementService) { }
 
   ngOnInit() {
     this.getAllAdvertisement('', localStorage.getItem('userId'));
@@ -27,15 +27,11 @@ export class AllAdvertisementComponent implements OnInit {
           for (const i of advertisements) {
             this.advertisements.push(i);
           }
-          console.log(advertisements);
-        },
-        error => {
-          console.log(error);
         }
       );
     if (this.advertisements.length === 0) {
-        this.advertisementService.openSnackBar('Brak innych ogłoszeń', 'Brak');
-      }
+      this.advertisementService.openSnackBar('Brak innych ogłoszeń', 'Brak');
+    }
   }
   nextAdvertisement(value) {
     this.showedItem = value;

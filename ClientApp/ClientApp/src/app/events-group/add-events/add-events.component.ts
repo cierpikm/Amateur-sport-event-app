@@ -14,7 +14,8 @@ export class AddEventsComponent implements OnInit {
     SportType: 0,
     Date: new Date(),
     Localization: {
-      Street: '', StreetNumber: 0,  City: ''},
+      Street: '', StreetNumber: 0, City: ''
+    },
     ExtraInformation: '',
     description: '',
     facebookURL: '',
@@ -41,14 +42,6 @@ export class AddEventsComponent implements OnInit {
     this.router.navigateByUrl('user/event');
   }
   saveAdvertisement() {
-    this.eventService.addEvent(this.event).subscribe(
-      data => {
-        console.log(data);
-      },
-      error => {
-        console.log(error);
-      }
-    );
-
+    this.eventService.addEvent(this.event);
   }
 }
